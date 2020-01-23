@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,12 +22,13 @@ body {
   overflow: hidden;
   padding: 50px 80px;
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 250px 1fr;
   .main__wrapper-in {
     width: 100%;
     height: 100%;
-    opacity: 0.5;
-    background-color: white;
-    border-radius: 4px 0 0 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 0 4px 4px 0;
     box-shadow: 0 0 120px rgba(31, 32, 41, 0.1);    
   }
 }

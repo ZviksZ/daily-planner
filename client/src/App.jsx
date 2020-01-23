@@ -1,14 +1,18 @@
-import React   from 'react';
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
+import React                     from 'react';
+import {BrowserRouter as Router} from 'react-router-dom'
+import {useRoutes}               from "./routes"
 
 function App() {
-  return (
-    <div className="main__wrapper-outer">
-      <div className="main__wrapper-in">
-         <Sidebar/>
-      </div>
-    </div>
-  );
+   const routes = useRoutes(true)
+
+   return (
+      <Router>         
+         <div className="main__wrapper-outer">
+            {routes}
+         </div>
+      </Router>
+
+   );
 }
 
 export default App;
