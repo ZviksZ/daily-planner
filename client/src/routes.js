@@ -1,6 +1,6 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import Sidebar                   from "./components/Sidebar/Sidebar.jsx";
+import Sidebar                   from "./components/Sidebar/Sidebar";
 
 
 export const useRoutes = isAuthenticated => {
@@ -13,8 +13,23 @@ export const useRoutes = isAuthenticated => {
                   <Route path="/" exact>
                      <h1>daily</h1>
                   </Route>
-                  <Route path="/work">
-                     <h1>work</h1>
+                  <Route path="/videos">
+                     <h1>videos</h1>
+                  </Route>
+                  <Route path="/features">
+                     <h1>features</h1>
+                  </Route>
+                  <Route path="/patterns">
+                     <h1>patterns</h1>
+                  </Route>
+                  <Route path="/semantic">
+                     <h1>semantic</h1>
+                  </Route>
+                  <Route path="/projects">
+                     <h1>projects</h1>
+                  </Route>
+                  <Route path="/english">
+                     <h1>english</h1>
                   </Route>
                   <Redirect to="/" />
                </Switch>
