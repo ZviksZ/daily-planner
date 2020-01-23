@@ -1,15 +1,25 @@
-import React     from 'react';
-import styles    from './Sidebar.module.scss'
-import {NavLink} from 'react-router-dom'
+import React, {useContext}   from 'react'
+import {AuthContext}         from "../../context/AuthContext.js"
+import styles                from './Sidebar.module.scss'
+import {NavLink, useHistory} from 'react-router-dom'
+import logoutIcon from '../../assets/img/logout-icon.png'
 
 const Sidebar = () => {
+   const history = useHistory()
+   const {logout} = useContext(AuthContext)
+
+   const logoutHandler = (e) => {
+      e.preventDefault()
+      logout()
+      history.push('/')
+   }
+   
    return (
       <div className={styles.wrapper}>
          <h1>Daily planner</h1>
 
          <nav>
-            <NavLink to='/' 
-                     exact
+            <NavLink to='/todo'                      
                      className={styles.links} 
                      activeClassName={styles.activeLink}>Список дел</NavLink>
             <NavLink to='/videos' 
@@ -32,7 +42,8 @@ const Sidebar = () => {
                      activeClassName={styles.activeLink}>Изучение английского</NavLink>
          </nav>
 
-         <a href="/" className={styles.exitBtn}>
+         <a href="/" className={styles.exitBtn} onClick={logoutHandler}>
+            <img src={logoutIcon} alt="logout"/>
             Выход
          </a>
          
