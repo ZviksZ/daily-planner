@@ -10,7 +10,7 @@ export const useRoutes = isAuthenticated => {
       return (
          <div className="main__wrapper-outer">
             <Sidebar/>
-
+            
             <div className="main__wrapper-in">
                <Switch>
                   <Route exact path="/"

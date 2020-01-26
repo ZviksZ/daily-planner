@@ -16,7 +16,7 @@ const TodosPage = (props) => {
    const pressHandler = async e => {
       if (e.key === 'Enter') {
          try {
-            const data = await request('/api/todo/generate', 'POST', { title }, {
+            await request('/api/todo/generate', 'POST', { title }, {
                Authorization: `Bearer ${token}`
             })
             setTitle('')
@@ -32,7 +32,16 @@ const TodosPage = (props) => {
          })
          setTodos(fetched)
       } catch (e) {}
-   }, [token, request])
+   }, [token, request, setTodos])
+   
+   const deleteTodoItem = async (id) => {
+      try {
+         await request(`/api/todo/${id}`, 'DELETE', null, {
+            Authorization: `Bearer ${token}`
+         })
+         fetchLinks()
+      } catch (e) {}
+   }
 
    useEffect(() => {
       fetchLinks()
@@ -47,7 +56,14 @@ const TodosPage = (props) => {
          <input type="text" value={title} onChange={handleChange} onKeyPress={pressHandler}/>
          
          {
-            todos && todos.map(todo => <div key={todo._id}>{todo.title}</div>)
+            todos && todos.map(todo => {
+               return (
+                  <div id={todo._id} key={todo._id}>
+                     {todo.title}
+                     <button onClick={() => deleteTodoItem(todo._id)}>delete</button>
+                  </div> 
+               )
+            } )
          }
       </div>
    );

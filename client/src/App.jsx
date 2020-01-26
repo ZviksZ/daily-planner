@@ -1,5 +1,6 @@
 import React                     from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
+import Loader                    from "./components/TodosPage/TodosPage.jsx";
 import {useAuth}                 from "./hooks/auth.hook.js";
 import {useRoutes}               from "./routes"
 import {AuthContext}             from "./context/AuthContext";
@@ -10,7 +11,7 @@ function App() {
    const routes = useRoutes(isAuthenticated)
 
    if (!ready) {
-      return <div>loader</div>
+      return <Loader/>
    }
 
    return (      
