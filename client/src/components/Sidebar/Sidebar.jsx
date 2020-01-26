@@ -44,7 +44,7 @@ const Sidebar = () => {
 
          <a href="/" className={styles.exitBtn} onClick={logoutHandler}>
             <img src={logoutIcon} alt="logout"/>
-            Выход
+            <span>Выход</span>
          </a>
          
       </div>

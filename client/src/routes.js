@@ -2,6 +2,7 @@ import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import {AuthPage}                from "./components/AuthPage/AuthPage";
 import Sidebar                   from "./components/Sidebar/Sidebar";
+import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
 
 
 export const useRoutes = isAuthenticated => {
@@ -15,7 +16,7 @@ export const useRoutes = isAuthenticated => {
                   <Route exact path="/"
                          render={() => <Redirect from='/' to='/todo'/>}/>
                   <Route path="/todo">
-                     <h1>daily</h1>
+                     <TodosPage/>
                   </Route>
                   <Route path="/videos">
                      <h1>videos</h1>

@@ -6,6 +6,7 @@ const shema = new Schema({
       required: true
    },
    date: {type: Date,  default: Date.now},
+   code: {type: String, required: true, unique: true},
    owner: {type: Types.ObjectId, ref: 'User'}
 })
 
