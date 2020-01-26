@@ -7,8 +7,9 @@ import Sidebar                   from "./components/Sidebar/Sidebar";
 export const useRoutes = isAuthenticated => {
    if (isAuthenticated) {
       return (
-         <>
+         <div className="main__wrapper-outer">
             <Sidebar/>
+
             <div className="main__wrapper-in">
                <Switch>
                   <Route exact path="/"
@@ -36,16 +37,18 @@ export const useRoutes = isAuthenticated => {
                   </Route>
                </Switch>
             </div>
-         </>
+         </div>
       )
    }
 
    return (
-      <Switch>
-         <Route path="/" exact>
-            <AuthPage/>
-         </Route>
-         {/*<Redirect to="/" />*/}
-      </Switch>
+      <div className="main__wrapper-outer flex-center">
+         <Switch>
+            <Route path="/" exact>
+               <AuthPage/>
+            </Route>
+            {/*<Redirect to="/" />*/}
+         </Switch>
+      </div>
    )
 }
