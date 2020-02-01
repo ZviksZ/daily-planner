@@ -1,16 +1,15 @@
 import React, {useContext}   from 'react'
-import {AuthContext}         from "../../context/AuthContext.js"
 import styles                from './Sidebar.module.scss'
 import {NavLink, useHistory} from 'react-router-dom'
 import logoutIcon from '../../assets/img/logout-icon.png'
 
 const Sidebar = () => {
    const history = useHistory()
-   const {logout} = useContext(AuthContext)
+   /*const {logout} = useContext(AuthContext)*/
 
    const logoutHandler = (e) => {
       e.preventDefault()
-      logout()
+      /*logout()*/
       history.push('/')
    }
    

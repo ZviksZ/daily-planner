@@ -1,41 +1,41 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {AuthContext}                            from "../../context/AuthContext.js";
-import {useHttp}                                from "../../hooks/http.hook.js";
-import styles                                   from './AuthPage.module.scss'
+import React, {useEffect, useState} from 'react'
+import {connect}                    from "react-redux";
+import {useHttp}                    from "../../hooks/http.hook.js";
+import {login, register}            from "../../redux/authReducer.js";
+import styles                       from './AuthPage.module.scss'
 
 
-export const AuthPage = () => {
-   const auth = useContext(AuthContext)
-   const {loading, error, request, clearError} = useHttp()
-   const [message, setMessage] = useState('')
+const AuthPage = ({login, register, error, message}) => {
+   /*const auth = useContext(AuthContext)*/
+   const {loading,  request, clearError} = useHttp()
+   
+   /*const [message, setMessage] = useState('')*/
+   
    const [form, setForm] = useState({
       email: '',
       password: ''
    })
 
    useEffect(() => {
+      const abortController = new AbortController();
+
       setTimeout(() => {
          clearError()
-         setMessage('')
-      }, 3000)      
+      }, 3000)
+
+      return () => {
+         abortController.abort();
+      };
    }, [error, message, clearError])
 
    const changeHandler = e => {
       setForm({...form, [e.target.name]: e.target.value})
    }
    const registerHandler = async () => {
-      try {
-         const data = await request('/api/auth/register', 'POST', {...form})
-         setMessage(data.message)
-      } catch (e) {
-      }
+      register(form.email, form.password)
    }
    const loginHandler = async () => {
-      try {
-         const data = await request('/api/auth/login', 'POST', {...form})
-         auth.login(data.token, data.userId)
-      } catch (e) {
-      }
+      login(form.email, form.password)
    }
 
    return (
@@ -45,7 +45,7 @@ export const AuthPage = () => {
          <h1>Daily planner</h1>
          <div className={styles.authForm}>
             <div className={styles.authFormFields}>
-               <h3 className={styles.authFormTitle}>Авторизация</h3>               
+               <h3 className={styles.authFormTitle}>Авторизация</h3>
                <div className={styles.field}>
                   <label htmlFor="email">Email</label>
                   <input
@@ -55,7 +55,7 @@ export const AuthPage = () => {
                      type="text"
                      name="email"
                      value={form.email}
-                  />                  
+                  />
                </div>
 
                <div className={styles.field}>
@@ -89,3 +89,12 @@ export const AuthPage = () => {
       </div>
    )
 }
+
+let mapStateToProps = (state) => {
+   return {
+      error: state.authPage.error,
+      message: state.authPage.message
+   }
+}
+
+export default connect(mapStateToProps, {login, register})(AuthPage)

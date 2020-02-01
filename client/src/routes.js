@@ -1,6 +1,6 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import {AuthPage}                from "./components/AuthPage/AuthPage";
+import AuthPage                  from "./components/AuthPage/AuthPage";
 import Sidebar                   from "./components/Sidebar/Sidebar";
 import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
 
@@ -10,11 +10,8 @@ export const useRoutes = isAuthenticated => {
       return (
          <div className="main__wrapper-outer">
             <Sidebar/>
-            
             <div className="main__wrapper-in">
                <Switch>
-                  <Route exact path="/"
-                         render={() => <Redirect from='/' to='/todo'/>}/>
                   <Route path="/todo">
                      <TodosPage/>
                   </Route>
@@ -36,6 +33,8 @@ export const useRoutes = isAuthenticated => {
                   <Route path="/english">
                      <h1>english</h1>
                   </Route>
+                  <Route path="/"
+                         render={() => <Redirect from='/' to='/todo'/>}/>
                </Switch>
             </div>
          </div>
@@ -48,7 +47,7 @@ export const useRoutes = isAuthenticated => {
             <Route path="/" exact>
                <AuthPage/>
             </Route>
-            {/*<Redirect to="/" />*/}
+            <Redirect to="/"/>
          </Switch>
       </div>
    )

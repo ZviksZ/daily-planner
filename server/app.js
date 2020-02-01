@@ -1,5 +1,4 @@
 const express = require('express')
-/*const config = require('config')*/
 const path = require('path')
 const mongoose = require('mongoose')
 
@@ -11,7 +10,6 @@ app.use(express.json({extended: true}))
 
 app.use('/api/auth', require('./routes/auth.routes.js'))
 app.use('/api/todo', require('./routes/todo.routes.js'))
-// app.use('/t', require('./routes/redirect.routes.js'))
 
 
 async function start() {

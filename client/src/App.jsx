@@ -1,29 +1,47 @@
-import React                     from 'react';
+import React, {useEffect}        from 'react';
+import {connect, Provider}       from "react-redux";
 import {BrowserRouter as Router} from 'react-router-dom'
-import Loader                    from "./components/TodosPage/TodosPage.jsx";
-import {useAuth}                 from "./hooks/auth.hook.js";
+import Loader                    from "./components/common/Loader/Loader.jsx";
+import {localStorageUser}        from "./redux/authReducer.js";
+import store                     from "./redux/store.js";
 import {useRoutes}               from "./routes"
-import {AuthContext}             from "./context/AuthContext";
 
-function App() {
-   const {token, login, logout, userId, ready} = useAuth()
+const App = ({token, localStorageUser}) => {
    const isAuthenticated = !!token
    const routes = useRoutes(isAuthenticated)
-
-   if (!ready) {
+   
+   useEffect(() => {
+      localStorageUser()
+   }, [])
+   /*if (!ready) {
       return <Loader/>
-   }
+   }*/
 
-   return (      
-      <AuthContext.Provider value={{
-         token, login, logout, userId, isAuthenticated
-      }}>
-         <Router>            
-            {routes}
-         </Router>
-      </AuthContext.Provider>
-
-   );
+   return (
+      <>
+         {routes}
+      </>
+   )
 }
 
-export default App;
+let mapStateToProps = (state) => {
+   return {
+      token: state.authPage.token,
+      userId: state.authPage.userId
+   }
+}
+
+const AppContainer = connect(mapStateToProps, {localStorageUser})(App)
+
+const RootComponent = () => {
+   return (
+      <Router>
+         <Provider store={store}>
+            <AppContainer/>
+         </Provider>
+      </Router>
+   )
+}
+
+
+export default RootComponent;

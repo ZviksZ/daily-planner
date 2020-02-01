@@ -1,13 +1,13 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {AuthContext}                                         from "../../context/AuthContext.js";
 import {useHttp}                                             from "../../hooks/http.hook.js";
 import Loader                                                from "../common/Loader/Loader.jsx";
+import TodoItem                                              from "./TodoItem/TodoItem.jsx";
 import styles                                                from './TodosPage.module.scss'
 
-const TodosPage = (props) => {
-   const [title, setTitle] = useState('');
+const TodosPage = () => {
+ /*  const [title, setTitle] = useState('');
    const [todos, setTodos] = useState([])
-   const {token} = useContext(AuthContext)
+   const {token, logout} = useContext(AuthContext)
    const {loading, request} = useHttp()
 
    const handleChange = e => {
@@ -16,12 +16,13 @@ const TodosPage = (props) => {
    const pressHandler = async e => {
       if (e.key === 'Enter') {
          try {
-            await request('/api/todo/generate', 'POST', { title }, {
+            await request('/api/todo/generate', 'POST', {title}, {
                Authorization: `Bearer ${token}`
             })
             setTitle('')
-            fetchLinks()            
-         } catch (e) {}
+            fetchLinks()
+         } catch (e) {
+         }
       }
    }
 
@@ -31,16 +32,29 @@ const TodosPage = (props) => {
             Authorization: `Bearer ${token}`
          })
          setTodos(fetched)
-      } catch (e) {}
-   }, [token, request, setTodos])
-   
-   const deleteTodoItem = async (id) => {
+      } catch (e) {
+         logout()
+      }
+   }, [token, request, logout])
+
+   const deleteTodoItem = async id => {
       try {
          await request(`/api/todo/${id}`, 'DELETE', null, {
             Authorization: `Bearer ${token}`
          })
          fetchLinks()
-      } catch (e) {}
+      } catch (e) {
+      }
+   }
+
+   const updateTodoItem = async (id, title) => {
+      try {
+         await request(`/api/todo/${id}`, 'PUT', {title}, {
+            Authorization: `Bearer ${token}`
+         })
+         fetchLinks()
+      } catch (e) {
+      }
    }
 
    useEffect(() => {
@@ -49,24 +63,17 @@ const TodosPage = (props) => {
 
    if (loading) {
       return <Loader/>
-   }
-   
+   }*/
    return (
-      <div>
-         <input type="text" value={title} onChange={handleChange} onKeyPress={pressHandler}/>
-         
-         {
-            todos && todos.map(todo => {
-               return (
-                  <div id={todo._id} key={todo._id}>
-                     {todo.title}
-                     <button onClick={() => deleteTodoItem(todo._id)}>delete</button>
-                  </div> 
-               )
-            } )
-         }
-      </div>
-   );
+      <div>todos page</div>         
+   )
 }
 
 export default TodosPage;
+
+{/*<div>
+         <input type="text" value={title} onChange={handleChange} onKeyPress={pressHandler}/>
+         {
+            todos && todos.map(todo => <TodoItem key={todo._id} todo={todo} deleteTodoItem={deleteTodoItem}/>)
+         }
+      </div>*/}   
