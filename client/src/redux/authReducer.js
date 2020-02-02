@@ -65,7 +65,7 @@ export const login = (email, password) => async (dispatch) => {
    } catch (error) {
       dispatch(setError(error.response.data.message))
       setTimeout(() => {
-         dispatch(setError(''))
+         dispatch(setError(''))         
       }, 3000)
    }
 }
@@ -93,11 +93,18 @@ export const logout = () => async (dispatch) => {
 }
 
 export const localStorageUser = () => async (dispatch) => {
-   const data = JSON.parse(localStorage.getItem('userData'))
-   if (data && data.token) {
-      dispatch(setUserData(data.token, data.userId))
+   try {
+      const data = JSON.parse(localStorage.getItem('userData'))
+      
+      if (data && data.token) {
+         dispatch(setUserData(data.token, data.userId))
+      } 
+      
+      dispatch(setReady(true))
+   } catch (e) {
+      
    }
-   dispatch(setReady(true))
+   
 }
 
 

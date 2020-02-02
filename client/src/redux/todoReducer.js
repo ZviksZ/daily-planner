@@ -1,6 +1,5 @@
 import {todosAPI}       from "../api/api.js";
 import {getGlobalError} from "./appReducer.js";
-import {logoutUser}     from "./authReducer.js";
 
 const SET_TODOS = 'my-social-network/todos/SET_TODOS';
 const ADD_TODO = 'my-social-network/todos/ADD_TODO';
@@ -46,7 +45,6 @@ export const getTodos = () => async (dispatch) => {
       let response = await todosAPI.getTodos()
       dispatch(setTodos(response))
    } catch (error) {
-      console.log(error.response.data.message)
       dispatch(getGlobalError(error.response.data.message))
    }
 }

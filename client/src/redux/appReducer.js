@@ -1,3 +1,5 @@
+import {logout} from "./authReducer.js";
+
 const SET_LOADING = 'my-social-network/app/SET_LOADING';
 const SET_GLOBAL_ERROR = 'my-social-network/app/SET_GLOBAL_ERROR';
 
@@ -27,10 +29,14 @@ export const setLoading = bool => ({type: SET_LOADING, bool})
 export const setGlobalError = error => ({type: SET_GLOBAL_ERROR, error})
 
 export const getGlobalError = (error) => async (dispatch) => {
-   dispatch(setGlobalError(error))
-   setTimeout(() => {
-      dispatch(setGlobalError(""))
-   }, 3000)
+   if (error === 'Нет авторизации') {
+      dispatch(logout())
+   } else {
+      dispatch(setGlobalError(error))
+      setTimeout(() => {
+         dispatch(setGlobalError(""))
+      }, 3000)
+   }  
 }
 
 
