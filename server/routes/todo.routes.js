@@ -32,9 +32,8 @@ router.get('/', auth, async (req, res) => {
 })
 
 router.delete("/:id", auth, async (req, res)=>{
-   console.log(req)
    const message = await Todo
-      .findByIdAndRemove({owner: req.user.userId, _id: req.params.id})
+      .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
       .then(() => 'Todo deleted');
 
    res.json({ message });

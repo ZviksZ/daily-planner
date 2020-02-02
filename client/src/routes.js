@@ -1,6 +1,7 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
+import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";
 import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
 
@@ -10,6 +11,7 @@ export const useRoutes = isAuthenticated => {
       return (
          <div className="main__wrapper-outer">
             <Sidebar/>
+            <GlobalError />
             <div className="main__wrapper-in">
                <Switch>
                   <Route path="/todo">

@@ -84,9 +84,9 @@ export const register = (email, password) => async (dispatch) => {
          dispatch(setError(''))
          dispatch(setLoading(false))
       }, 3000)
-   }
-   
+   }   
 }
+
 export const logout = () => async (dispatch) => {
    dispatch(logoutUser())
    localStorage.removeItem('userData')

@@ -51,7 +51,9 @@ const Sidebar = ({logout}) => {
    );
 };
 
-let mapStateToProps = (state) => {}
+let mapStateToProps = (state) => {
+   return {}
+}
 
 export default connect(mapStateToProps, {logout})(Sidebar);
 

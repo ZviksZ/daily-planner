@@ -1,30 +1,17 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {useHttp}                                             from "../../hooks/http.hook.js";
-import Loader                                                from "../common/Loader/Loader.jsx";
-import TodoItem                                              from "./TodoItem/TodoItem.jsx";
-import styles                                                from './TodosPage.module.scss'
+import React, {useEffect, useState}       from 'react';
+import {connect}                          from "react-redux";
+import {createTodo, deleteTodo, getTodos} from "../../redux/todoReducer.js";
+import Loader                             from "../common/Loader/Loader.jsx";
+import TodoItem                           from "./TodoItem/TodoItem.jsx";
+import styles                             from './TodosPage.module.scss'
 
-const TodosPage = () => {
- /*  const [title, setTitle] = useState('');
-   const [todos, setTodos] = useState([])
-   const {token, logout} = useContext(AuthContext)
-   const {loading, request} = useHttp()
+const TodosPage = ({getTodos, createTodo, deleteTodo, loading, todos}) => {
+   useEffect(() => {
+      getTodos()
+   },[])
+   const [title, setTitle] = useState('');
 
-   const handleChange = e => {
-      setTitle(e.target.value)
-   }
-   const pressHandler = async e => {
-      if (e.key === 'Enter') {
-         try {
-            await request('/api/todo/generate', 'POST', {title}, {
-               Authorization: `Bearer ${token}`
-            })
-            setTitle('')
-            fetchLinks()
-         } catch (e) {
-         }
-      }
-   }
+   /*
 
    const fetchLinks = useCallback(async () => {
       try {
@@ -59,21 +46,35 @@ const TodosPage = () => {
 
    useEffect(() => {
       fetchLinks()
-   }, [fetchLinks])
-
+   }, [fetchLinks])*/
+   const handleChange = e => {
+      setTitle(e.target.value)
+   }
+   const pressHandler = async e => {
+      if (e.key === 'Enter') {
+         createTodo(title)
+         setTitle('')
+      }
+   }
    if (loading) {
       return <Loader/>
-   }*/
+   }
    return (
-      <div>todos page</div>         
-   )
-}
-
-export default TodosPage;
-
-{/*<div>
+      <div>
          <input type="text" value={title} onChange={handleChange} onKeyPress={pressHandler}/>
          {
-            todos && todos.map(todo => <TodoItem key={todo._id} todo={todo} deleteTodoItem={deleteTodoItem}/>)
+            todos && todos.map(todo => <TodoItem key={todo._id} todo={todo} deleteTodoItem={deleteTodo}/>)
+           /* todos && todos.map(todo => <TodoItem key={todo._id} todo={todo} deleteTodoItem={deleteTodoItem}/>)*/
          }
-      </div>*/}   
+      </div>
+   )
+}
+let mapStateToProps = (state) => {
+   return {
+      loading: state.common.loading,
+      todos: state.todoPage.todos
+   }
+}
+
+export default connect(mapStateToProps, {getTodos, createTodo, deleteTodo})(TodosPage)
+

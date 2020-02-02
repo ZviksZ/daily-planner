@@ -25,7 +25,8 @@ body {
   padding: 50px 80px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 300px 1fr;  
+  grid-template-columns: 300px 1fr;
+  position: relative;
   .main__wrapper-in {
     width: 100%;
     height: 100%;

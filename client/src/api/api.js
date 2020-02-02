@@ -1,12 +1,20 @@
-import * as axios from "axios";
-
+import * as axios                from "axios";
 
 const instance = axios.create({
-   /*withCredentials: true,
-   headers: {
-      Authorization: `Bearer ${token}`
-   }*/
+   withCredentials: true
 })
+
+instance.interceptors.request.use(config => {
+   const data = JSON.parse(localStorage.getItem('userData')) || ''
+   const token = data.token
+
+   if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+   }  
+   
+   return config
+})
+
 export const authAPI = {
    login(email, password) {
       return instance.post('/api/auth/login', {email, password}).then(response => response.data);
@@ -17,38 +25,16 @@ export const authAPI = {
 }
 export const todosAPI = {
    getTodos() {
-      return instance.get(`todo-lists`).then(response => response.data);
+      return instance.get(`/api/todo`).then(response => response.data);
    },
-   createTodolist(title) {
-      return instance.post(`todo-lists`, {title: title});
+   createTodo(title) {
+      return instance.post(`/api/todo/generate`, {title: title});
    },
-   deleteTodolist(todolistId) {
-      return instance.delete(`todo-lists/${todolistId}`);
+   deleteTodo(todoId) {
+      return instance.delete(`/api/todo/${todoId}`);
    },
    updateTodolistTitle(todolistId, title) {
       return instance.put(`todo-lists/${todolistId}`, {title: title});
    },
-   getTodolistTasks(todolistId, itemsPortion, pageSize) {
-      return instance.get(`todo-lists/${todolistId}/tasks?page=${itemsPortion}&count=${pageSize}`).then(response => response.data);
-   },
-   createNewTask(todolistId, title) {
-      return instance.post(`todo-lists/${todolistId}/tasks`, {title: title});
-   },
-   updateTask(todolistId, taskId, newItem) {
-      return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {
-         status: {
-            title: newItem.title,
-            description: newItem.description,
-            completed: newItem.completed,
-            status: newItem.status,
-            priority: newItem.priority,
-            startDate: newItem.startDate,
-            deadline: newItem.deadline
-         }
-      });
-   },
-   deleteTask(todolistId, taskId) {
-      return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`);
-   }
 
 }

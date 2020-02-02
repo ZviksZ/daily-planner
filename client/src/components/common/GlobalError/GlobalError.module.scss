@@ -1,0 +1,22 @@
+.globalError {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    .message {
+        background: #fff;
+        padding: 20px 30px;
+        color: red;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        border: 3px solid #333333;
+        text-transform: uppercase;
+        border-radius: 5px;
+    }
+}

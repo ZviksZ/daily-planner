@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {connect}                    from "react-redux";
-import {useHttp}                    from "../../hooks/http.hook.js";
 import {login, register}            from "../../redux/authReducer.js";
 import styles                       from './AuthPage.module.scss'
 
