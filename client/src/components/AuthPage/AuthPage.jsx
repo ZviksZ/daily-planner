@@ -5,29 +5,11 @@ import {login, register}            from "../../redux/authReducer.js";
 import styles                       from './AuthPage.module.scss'
 
 
-const AuthPage = ({login, register, error, message}) => {
-   /*const auth = useContext(AuthContext)*/
-   const {loading,  request, clearError} = useHttp()
-   
-   /*const [message, setMessage] = useState('')*/
-   
+const AuthPage = ({login, register, error, message,loading}) => { 
    const [form, setForm] = useState({
       email: '',
       password: ''
    })
-
-   useEffect(() => {
-      const abortController = new AbortController();
-
-      setTimeout(() => {
-         clearError()
-      }, 3000)
-
-      return () => {
-         abortController.abort();
-      };
-   }, [error, message, clearError])
-
    const changeHandler = e => {
       setForm({...form, [e.target.name]: e.target.value})
    }
@@ -93,7 +75,8 @@ const AuthPage = ({login, register, error, message}) => {
 let mapStateToProps = (state) => {
    return {
       error: state.authPage.error,
-      message: state.authPage.message
+      message: state.authPage.message,
+      loading: state.common.loading
    }
 }
 

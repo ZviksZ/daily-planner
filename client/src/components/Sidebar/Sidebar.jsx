@@ -1,15 +1,16 @@
-import React, {useContext}   from 'react'
-import styles                from './Sidebar.module.scss'
-import {NavLink, useHistory} from 'react-router-dom'
-import logoutIcon from '../../assets/img/logout-icon.png'
+import React, {useContext}        from 'react'
+import {connect}                  from "react-redux";
+import {localStorageUser, logout} from "../../redux/authReducer.js";
+import styles                     from './Sidebar.module.scss'
+import {NavLink, useHistory}      from 'react-router-dom'
+import logoutIcon                 from '../../assets/img/logout-icon.png'
 
-const Sidebar = () => {
+const Sidebar = ({logout}) => {
    const history = useHistory()
-   /*const {logout} = useContext(AuthContext)*/
 
    const logoutHandler = (e) => {
       e.preventDefault()
-      /*logout()*/
+      logout()
       history.push('/')
    }
    
@@ -50,6 +51,8 @@ const Sidebar = () => {
    );
 };
 
-export default Sidebar;
+let mapStateToProps = (state) => {}
+
+export default connect(mapStateToProps, {logout})(Sidebar);
 
 

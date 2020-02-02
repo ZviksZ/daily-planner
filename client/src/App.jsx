@@ -6,16 +6,16 @@ import {localStorageUser}        from "./redux/authReducer.js";
 import store                     from "./redux/store.js";
 import {useRoutes}               from "./routes"
 
-const App = ({token, localStorageUser}) => {
+const App = ({token, localStorageUser,ready}) => {
    const isAuthenticated = !!token
    const routes = useRoutes(isAuthenticated)
    
    useEffect(() => {
       localStorageUser()
    }, [])
-   /*if (!ready) {
+   if (!ready) {
       return <Loader/>
-   }*/
+   }
 
    return (
       <>
@@ -27,21 +27,9 @@ const App = ({token, localStorageUser}) => {
 let mapStateToProps = (state) => {
    return {
       token: state.authPage.token,
-      userId: state.authPage.userId
+      userId: state.authPage.userId,
+      ready: state.authPage.ready
    }
 }
 
-const AppContainer = connect(mapStateToProps, {localStorageUser})(App)
-
-const RootComponent = () => {
-   return (
-      <Router>
-         <Provider store={store}>
-            <AppContainer/>
-         </Provider>
-      </Router>
-   )
-}
-
-
-export default RootComponent;
+export default connect(mapStateToProps, {localStorageUser})(App)
