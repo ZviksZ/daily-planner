@@ -33,8 +33,10 @@ export const todosAPI = {
    deleteTodo(todoId) {
       return instance.delete(`/api/todo/${todoId}`);
    },
-   updateTodolistTitle(todolistId, title) {
-      return instance.put(`todo-lists/${todolistId}`, {title: title});
+   updateTodo(todoId, title) {
+      return instance.put(`/api/todo/${todoId}`, {title: title});
    },
-
+   completeTodo(todoId, completed) {
+      return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
+   }
 }

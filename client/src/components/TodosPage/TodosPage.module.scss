@@ -1,3 +1,60 @@
 .todoPage {
     padding: 40px 50px;
+    .todosList {
+        margin-top: 30px;
+        h3 {
+            font-size: 20px;
+            letter-spacing: 1.8px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.formGroup {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.formGroup input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.formGroup label {
+    position: relative;
+    cursor: pointer;    
+}
+
+.formGroup label:before {
+    content:'';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid #ff8600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.5s ease;
+}
+
+.formGroup input:checked + label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #ff8600;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
 }
