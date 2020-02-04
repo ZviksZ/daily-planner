@@ -34,15 +34,16 @@
                 }
             }
             .closeBtn {
-                color: #404447;
+                color: #83888b;
                 cursor: pointer;
                 transition: 0s;
                 &:hover {
-                    color: #E10417;
+                    color: #e16c80;
                 }
+
             }
             .editBtn {
-                color: #404447;
+                color: #83888b;
                 cursor: pointer;
                 transition: 0s;
                 &:hover {
@@ -122,10 +123,11 @@
     outline: none;
     height: 24px;
     width: 100%;
-    color: #cccccc;
+    color: #000000;
     font-size: 15px;
     font-weight: 500;
     padding: 25px 15px;
+    margin-right: 10px;
     &:focus {
         color: #000000;
         border: 1px solid #ff8600

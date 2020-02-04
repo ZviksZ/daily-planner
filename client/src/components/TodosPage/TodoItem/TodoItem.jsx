@@ -20,12 +20,16 @@ const TodoItem = ({todo, deleteTodoItem, updateTodo, completeTodo}) => {
 
    return (
       <div id={todo._id} key={todo._id} className={styles.todoItem}>
-         {
-            editMode ?
+         { editMode ?
                <>
-                  <input type="text" className={styles.editField} value={title} onChange={(e) => setTitle(e.target.value)} />
-                  <button onClick={updateItem}>Обновить</button>
-                  <button onClick={() => setEditMode(false)}>Отменить</button>
+                  <input type="text"
+                         className={styles.editField}
+                         value={title}
+                         onChange={(e) => setTitle(e.target.value)} />
+                  <div className={styles.btns}>
+                     <MdRefresh title="Внести изменения" onClick={updateItem} className={styles.editBtn} size={'1.8rem'}/>
+                     <TiCancel title="Отменить редактирование" onClick={() => setEditMode(false)} className={styles.closeBtn} size={'2rem'}/>
+                  </div>
                </>
                :
                <>
@@ -34,8 +38,8 @@ const TodoItem = ({todo, deleteTodoItem, updateTodo, completeTodo}) => {
                      <label htmlFor={`chkbox${todo._id}`}>{todo.title}</label>
                   </div>
                   <div className={styles.btns}>
-                     <FaPen onClick={() => setEditMode(true)} className={styles.editBtn} size={'1.2rem'}/>
-                     <FaWindowClose onClick={() => deleteTodoItem(todo._id)} className={styles.closeBtn} size={'1.6rem'}/>
+                     <FaPen title="Редактировать" onClick={() => setEditMode(true)} className={styles.editBtn} size={'1.2rem'}/>
+                     <FaWindowClose title="Удалить" onClick={() => deleteTodoItem(todo._id)} className={styles.closeBtn} size={'1.6rem'}/>
                   </div>
                </>
          }
