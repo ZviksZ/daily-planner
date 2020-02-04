@@ -1,40 +1,44 @@
 import React, {useState} from 'react';
 import styles            from '../TodosPage.module.scss'
 
+import { FaWindowClose } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
+import { MdRefresh } from "react-icons/md";
+import { TiCancel } from "react-icons/ti";
+
 const TodoItem = ({todo, deleteTodoItem, updateTodo, completeTodo}) => {
    const [editMode, setEditMode] = useState(false);
    const [title, setTitle] = useState(todo.title)
-   
+
    const updateItem = () => {
       updateTodo(todo._id, title)
       setEditMode(false)
    }
    const toggleChecked = () => {
       completeTodo(todo._id, !todo.completed)
-   } 
-   
+   }
+
    return (
-      <div id={todo._id} key={todo._id}>
+      <div id={todo._id} key={todo._id} className={styles.todoItem}>
          {
             editMode ?
-               <>                  
-                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+               <>
+                  <input type="text" className={styles.editField} value={title} onChange={(e) => setTitle(e.target.value)} />
                   <button onClick={updateItem}>Обновить</button>
                   <button onClick={() => setEditMode(false)}>Отменить</button>
                </>
                :
                <>
-                  <div className={styles.formGroup}>
-                     <input type="checkbox" 
-                            id={`chkbox${todo._id}`} 
-                            checked={todo.completed} 
-                            onChange={toggleChecked}/>
+                  <div className={`${styles.formGroup} ${todo.completed && styles.formGroupChecked}`}>
+                     <input type="checkbox" id={`chkbox${todo._id}`} checked={todo.completed} onChange={toggleChecked}/>
                      <label htmlFor={`chkbox${todo._id}`}>{todo.title}</label>
                   </div>
-                  <button onClick={() => setEditMode(true)}>Редактировать</button>
-                  <button onClick={() => deleteTodoItem(todo._id)}>Удалить</button>
-               </>               
-         }         
+                  <div className={styles.btns}>
+                     <FaPen onClick={() => setEditMode(true)} className={styles.editBtn} size={'1.2rem'}/>
+                     <FaWindowClose onClick={() => deleteTodoItem(todo._id)} className={styles.closeBtn} size={'1.6rem'}/>
+                  </div>
+               </>
+         }
       </div>
    );
 }
