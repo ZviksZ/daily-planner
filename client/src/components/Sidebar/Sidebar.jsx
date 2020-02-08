@@ -1,9 +1,9 @@
-import React, {useContext}        from 'react'
-import {connect}                  from "react-redux";
-import {localStorageUser, logout} from "../../redux/authReducer.js";
-import styles                     from './Sidebar.module.scss'
-import {NavLink, useHistory}      from 'react-router-dom'
-import logoutIcon                 from '../../assets/img/logout-icon.png'
+import React                 from 'react'
+import {connect}             from "react-redux";
+import {logout}              from "../../redux/authReducer.js";
+import styles                from './Sidebar.module.scss'
+import {NavLink, useHistory} from 'react-router-dom'
+import logoutIcon            from '../../assets/img/logout-icon.png'
 
 const Sidebar = ({logout}) => {
    const history = useHistory()
@@ -13,32 +13,32 @@ const Sidebar = ({logout}) => {
       logout()
       history.push('/')
    }
-   
+
    return (
       <div className={styles.wrapper}>
          <h1>Daily planner</h1>
 
          <nav>
-            <NavLink to='/todo'                      
-                     className={styles.links} 
+            <NavLink to='/todo'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Список дел</NavLink>
-            <NavLink to='/videos' 
-                     className={styles.links} 
+            <NavLink to='/videos'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Видео для обучения</NavLink>
-            <NavLink to='/features' 
-                     className={styles.links} 
+            <NavLink to='/features'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Полезности</NavLink>
-            <NavLink to='/patterns' 
-                     className={styles.links} 
+            <NavLink to='/patterns'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Паттерны и лучшие практики</NavLink>
-            <NavLink to='/semantic' 
-                     className={styles.links} 
+            <NavLink to='/semantic'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Семантика html,css,js</NavLink>
-            <NavLink to='/projects' 
+            <NavLink to='/projects'
                      className={styles.links}
                      activeClassName={styles.activeLink}>Мои проекты</NavLink>
-            <NavLink to='/english' 
-                     className={styles.links} 
+            <NavLink to='/english'
+                     className={styles.links}
                      activeClassName={styles.activeLink}>Изучение английского</NavLink>
          </nav>
 
@@ -46,7 +46,7 @@ const Sidebar = ({logout}) => {
             <img src={logoutIcon} alt="logout"/>
             <span>Выход</span>
          </a>
-         
+
       </div>
    );
 };

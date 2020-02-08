@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {connect}                    from "react-redux";
 import {login, register}            from "../../redux/authReducer.js";
 import styles                       from './AuthPage.module.scss'
 
 
-const AuthPage = ({login, register, error, message,loading}) => { 
+const AuthPage = ({login, register, error, message,loading}) => {
    const [form, setForm] = useState({
       email: '',
       password: ''

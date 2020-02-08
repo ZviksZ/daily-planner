@@ -18,7 +18,7 @@ const TodosPage = ({completedTodos, noCompletedTodos, getTodos,
       return <Loader/>
    }
    return (
-      <div className={styles.todoPage}>
+      <div className="page-section">
          <h3>Список задач</h3>
          <AddItemForm onSend={createTodo} placeholder={'Введите новую задачу'}/>
          <div className={styles.todosList}>

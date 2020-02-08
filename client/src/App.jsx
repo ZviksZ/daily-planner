@@ -7,11 +7,11 @@ import {useRoutes}               from "./routes"
 const App = ({token, localStorageUser,ready}) => {
    const isAuthenticated = !!token
    const routes = useRoutes(isAuthenticated)
-   
+
    useEffect(() => {
       localStorageUser()
-   }, [])
-   
+   }, [localStorageUser])
+
    if (!ready) {
       return <Loader/>
    }

@@ -4,6 +4,7 @@ import AuthPage                  from "./components/AuthPage/AuthPage";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";
 import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
+import VideoPage                 from "./components/VideoPage/VideoPage.jsx";
 
 
 export const useRoutes = isAuthenticated => {
@@ -18,7 +19,7 @@ export const useRoutes = isAuthenticated => {
                      <TodosPage/>
                   </Route>
                   <Route path="/videos">
-                     <h1>videos</h1>
+                     <VideoPage/>
                   </Route>
                   <Route path="/features">
                      <h1>features</h1>

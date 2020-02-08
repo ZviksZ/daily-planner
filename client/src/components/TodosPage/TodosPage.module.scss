@@ -1,58 +1,49 @@
-
-.todoPage {
-    padding: 40px 50px;
-    h3 {
-        font-size: 24px;
-        letter-spacing: 1.8px;
-        font-weight: 700;
-        margin-bottom: 20px;
+.todosList {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    h4 {
+        margin-bottom: 10px;
     }
-    .todosList {
-        margin-top: 30px;
+    .todoInWork{
+        width: 60%;
+    }
+    .todoCompleted {
+        width: 35%;
+    }
+    .todoItem {
+        margin-bottom: 20px;
         display: flex;
-        justify-content: space-between;
-        h4 {
-            margin-bottom: 10px;
-        }
-        .todoInWork{
-            width: 60%;
-        }
-        .todoCompleted {
-            width: 35%;
-        }
-        .todoItem {
-            margin-bottom: 20px;
+        align-items: center;
+        .btns {
             display: flex;
+            justify-content: center;
             align-items: center;
-            .btns {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-left: auto;
-                svg {
-                    margin: 0 5px;
-                }
+            margin-left: auto;
+            svg {
+                margin: 0 5px;
             }
-            .closeBtn {
-                color: #83888b;
-                cursor: pointer;
-                transition: 0s;
-                &:hover {
-                    color: #e16c80;
-                }
+        }
+        .closeBtn {
+            color: #83888b;
+            cursor: pointer;
+            transition: 0s;
+            &:hover {
+                color: #e16c80;
+            }
 
-            }
-            .editBtn {
-                color: #83888b;
-                cursor: pointer;
-                transition: 0s;
-                &:hover {
-                    color: #ff8600;
-                }
+        }
+        .editBtn {
+            color: #83888b;
+            cursor: pointer;
+            transition: 0s;
+            &:hover {
+                color: #ff8600;
             }
         }
     }
 }
+
 
 .formGroup {
     display: flex;
@@ -72,9 +63,14 @@
     position: relative;
     cursor: pointer;
     font-weight: 500;
+    padding-left: 40px;
+    line-height: 1.5;
 }
 
 .formGroup label:before {
+    position: absolute;
+    left: 0;
+    top: 0;
     content:'';
     -webkit-appearance: none;
     background-color: transparent;
@@ -82,7 +78,6 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
     padding: 10px;
     display: inline-block;
-    position: relative;
     vertical-align: middle;
     cursor: pointer;
     margin-right: 10px;
