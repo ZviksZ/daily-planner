@@ -3,12 +3,14 @@ import thunkMiddleware                                 from 'redux-thunk';
 import appReducer                                      from "./appReducer";
 import todoReducer                                     from "./todoReducer";
 import authReducer                                     from "./authReducer";
+import videoReducer                                    from "./videoReducer.js";
 
 
 let reducers = combineReducers({
    common: appReducer,
    authPage: authReducer,
-   todoPage: todoReducer   
+   todoPage: todoReducer,
+   videoPage: videoReducer
 });
 
 

@@ -1,21 +1,19 @@
 const {Router} = require('express')
 const Video = require('../models/Video')
 const auth = require('../middleware/auth.middleware.js')
-const shortid = require('shortid')
 const router = Router()
 
-/*router.post('/generate', auth, async (req, res) => {
+router.post('/generate', auth, async (req, res) => {
    try {
-      const {title} = req.body
-      const code = shortid.generate()
+      const {link, name, channelTitle, previewImg} = req.body
 
-      const todo = new Todo({
-         title, code, owner: req.user.userId
+      const video = new Video({
+         link, name, channelTitle, previewImg, owner: req.user.userId
       })
 
-      await todo.save()
+      await video.save()
 
-      res.status(201).json({ todo })
+      res.status(201).json({ video })
 
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
@@ -24,13 +22,13 @@ const router = Router()
 
 router.get('/', auth, async (req, res) => {
    try {
-      const todos = await Todo.find({owner: req.user.userId})
-      res.json(todos)
+      const videos = await Video.find({owner: req.user.userId})
+      res.json(videos)
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }
 })
-
+/*
 router.delete("/:id", auth, async (req, res)=>{
    try {
       const message = await Todo

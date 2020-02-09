@@ -10,8 +10,8 @@ instance.interceptors.request.use(config => {
 
    if (token) {
       config.headers.Authorization = `Bearer ${token}`
-   }  
-   
+   }
+
    return config
 })
 
@@ -39,4 +39,24 @@ export const todosAPI = {
    completeTodo(todoId, completed) {
       return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
    }
+}
+export const videoAPI = {
+   getVideos() {
+      return instance.get(`/api/video`).then(response => response.data);
+   },
+   getDataById(videoId) {
+      return axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyDSQa6HWWvzckM7b9qoxgnhc-JOAdQ0QsQ`).then(response => response.data);
+   },
+   addVideo(link, name, channelTitle, previewImg) {
+      return instance.post(`/api/video/generate`, {link, name, channelTitle, previewImg});
+   },
+  /* deleteTodo(todoId) {
+      return instance.delete(`/api/todo/${todoId}`);
+   },
+   updateTodo(todoId, title) {
+      return instance.put(`/api/todo/${todoId}`, {title: title});
+   },
+   completeTodo(todoId, completed) {
+      return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
+   }*/
 }
