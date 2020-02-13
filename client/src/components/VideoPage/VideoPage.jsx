@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {connect}                    from "react-redux";
-import {addVideo, getVideos}        from "../../redux/videoReducer.js";
-import AddItemForm                  from "../common/AddItemForm/AddItemForm.jsx";
-import VideoItem                    from "./VideoItem/VideoItem.jsx";
-import VideoModal                   from "./VideoModal/VideoModal.jsx";
-import styles                       from './VideoPage.module.scss'
+import React, {useEffect, useState}                          from 'react';
+import {connect}                                             from "react-redux";
+import {addVideo, deleteVideo, getVideos, updateVideoStatus} from "../../redux/videoReducer.js";
+import AddItemForm                                           from "../common/AddItemForm/AddItemForm.jsx";
+import VideoItem                                             from "./VideoItem/VideoItem.jsx";
+import VideoModal                                            from "./VideoModal/VideoModal.jsx";
+import styles                                                from './VideoPage.module.scss'
 
 
-const VideoPage = ({videos, addVideo, getVideos}) => {
+const VideoPage = ({videos, addVideo, getVideos, deleteVideo, updateVideoStatus}) => {
    const [modalLink, setModalLink] = useState('')
 
    const openModal = link => {
@@ -28,7 +28,11 @@ const VideoPage = ({videos, addVideo, getVideos}) => {
          <AddItemForm onSend={addVideo} placeholder={'Ссылка на видео'}/>
          <div className={styles.videosList}>
             {
-               videos && videos.map(item => <VideoItem key={item._id} item={item} modalOpen={openModal}/>)
+               videos && videos.map(item => <VideoItem key={item._id}
+                                                       deleteVideo={deleteVideo}
+                                                       updateVideoStatus={updateVideoStatus}
+                                                       item={item}
+                                                       modalOpen={openModal}/>)
             }
          </div>
 
@@ -43,11 +47,7 @@ const VideoPage = ({videos, addVideo, getVideos}) => {
 let mapStateToProps = (state) => {
    return {
       videos: state.videoPage.videos
-      /*
-      todos: state.todoPage.todos,
-      completedTodos: getTodosCompleted(state),
-      noCompletedTodos: getTodosNoCompleted(state)*/
    }
 }
 
-export default connect(mapStateToProps, {addVideo, getVideos})(VideoPage)
+export default connect(mapStateToProps, {addVideo, getVideos, deleteVideo, updateVideoStatus})(VideoPage)

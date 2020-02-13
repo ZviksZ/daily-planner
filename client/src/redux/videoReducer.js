@@ -4,6 +4,8 @@ import {getGlobalError} from "./appReducer.js";
 
 const SET_VIDEOS = 'my-social-network/videos/SET_VIDEOS';
 const ADD_VIDEO = 'my-social-network/videos/ADD_VIDEO';
+const DELETE_VIDEO = 'my-social-network/videos/DELETE_VIDEO';
+const UPDATE_VIDEO_STATUS = 'my-social-network/videos/UPDATE_VIDEO_STATUS';
 
 let initialState = {
    videos: [],
@@ -25,24 +27,26 @@ const videoReducer = (state = initialState, action) => {
             videos: [...state.videos, action.video]
          }
       }
-      /*
-      case DELETE_TODO: {
+
+      case DELETE_VIDEO: {
          return {
             ...state,
-            todos: state.todos.filter(todo => todo._id !== action.todoId)
+            videos: state.videos.filter(video => video._id !== action.videoId)
          }
       }
-      case UPDATE_TODO: {
+
+      case UPDATE_VIDEO_STATUS: {
          return {
             ...state,
-            todos: state.todos.map(todo => {
-               if (todo._id === action.todoId) {
-                  return { ...todo, title: action.title }
+            videos: state.videos.map(video => {
+               if (video._id === action.videoId) {
+                  return { ...video, status: action.status }
                }
-               return todo
+               return video
             })
          }
       }
+      /*
       case COMPLETED_TODO: {
          return {
             ...state,
@@ -61,13 +65,10 @@ const videoReducer = (state = initialState, action) => {
 
 export const setVideos = videos => ({type: SET_VIDEOS, videos})
 export const addVideoItem = video => ({type: ADD_VIDEO, video})
-/*
-export const addTodo = todo => ({type: ADD_TODO, todo})
-export const deleteTodoItem = todoId => ({type: DELETE_TODO, todoId})
-export const updateTodoItem = (todoId, title) => ({type: UPDATE_TODO, todoId, title})
-export const completedTodoItem = (todoId, completed) => ({type: COMPLETED_TODO, todoId, completed})
+export const deleteVideoItem = videoId => ({type: DELETE_VIDEO, videoId})
+export const updateVideoItem = (videoId, status) => ({type: UPDATE_VIDEO_STATUS, videoId, status})
 
-*/
+
 export const getVideos = () => async (dispatch) => {
    try {
       let response = await videoAPI.getVideos()
@@ -90,6 +91,24 @@ export const addVideo = (url) => async dispatch => {
       dispatch(getGlobalError(error.response.data.message))
    }
 }
+
+export const deleteVideo = (videoId) => async dispatch => {
+   try {
+      await videoAPI.deleteVideo(videoId)
+      dispatch(deleteVideoItem(videoId))
+   } catch (error) {
+      dispatch(getGlobalError(error.response.data.message))
+   }
+}
+export const updateVideoStatus = (videoId, status) => async dispatch => {
+   try {
+      let response = await videoAPI.updateVideoStatus(videoId, status)
+      console.log(response)
+      dispatch(updateVideoItem(videoId, status))
+   } catch (error) {
+      dispatch(getGlobalError(error.response.data.message))
+   }
+}
 /*export const deleteTodo = (todoId) => async dispatch => {
    try {
       await todosAPI.deleteTodo(todoId)
@@ -98,14 +117,7 @@ export const addVideo = (url) => async dispatch => {
       dispatch(getGlobalError(error.response.data.message))
    }
 }
-export const updateTodo = (todoId, title) => async dispatch => {
-   try {
-      await todosAPI.updateTodo(todoId, title)
-      dispatch(updateTodoItem(todoId, title))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
+
 export const completeTodo = (todoId, completed) => async dispatch => {
    try {
       await todosAPI.completeTodo(todoId, completed)
@@ -114,10 +126,6 @@ export const completeTodo = (todoId, completed) => async dispatch => {
       dispatch(getGlobalError(error.response.data.message))
    }
 }*/
-
-
-
-
 
 
 export default videoReducer;

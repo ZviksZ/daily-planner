@@ -50,13 +50,10 @@ export const videoAPI = {
    addVideo(link, name, channelTitle, previewImg) {
       return instance.post(`/api/video/generate`, {link, name, channelTitle, previewImg});
    },
-  /* deleteTodo(todoId) {
-      return instance.delete(`/api/todo/${todoId}`);
+   deleteVideo(videoId) {
+      return instance.delete(`/api/video/${videoId}`);
    },
-   updateTodo(todoId, title) {
-      return instance.put(`/api/todo/${todoId}`, {title: title});
-   },
-   completeTodo(todoId, completed) {
-      return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
-   }*/
+   updateVideoStatus(videoId, status) {
+      return instance.put(`/api/video/${videoId}`, {status: status});
+   }
 }
