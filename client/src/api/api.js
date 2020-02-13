@@ -45,7 +45,7 @@ export const videoAPI = {
       return instance.get(`/api/video`).then(response => response.data);
    },
    getDataById(videoId) {
-      return axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyDSQa6HWWvzckM7b9qoxgnhc-JOAdQ0QsQ`).then(response => response.data);
+      return axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyA94xmO9loRS3OEzwickWE2Y8Sk2m2DqN0`).then(response => response.data);
    },
    addVideo(link, name, channelTitle, previewImg) {
       return instance.post(`/api/video/generate`, {link, name, channelTitle, previewImg});

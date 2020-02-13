@@ -5,7 +5,7 @@ const shema = new Schema({
    name: { type: String, required: true },
    channelTitle: { type: String, required: true },
    previewImg: { type: String, required: true },
-   status: { type: String, default: 'unwatched'},
+   status: { type: String, default: 'unviewed'},
    date: {type: Date,  default: Date.now},
    owner: {type: Types.ObjectId, ref: 'User'}
 })

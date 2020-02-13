@@ -1,12 +1,21 @@
-import React, {useEffect}    from 'react';
-import {connect}             from "react-redux";
-import {addVideo, getVideos} from "../../redux/videoReducer.js";
-import AddItemForm           from "../common/AddItemForm/AddItemForm.jsx";
-import styles                from './VideoPage.module.scss'
+import React, {useEffect, useState} from 'react';
+import {connect}                    from "react-redux";
+import {addVideo, getVideos}        from "../../redux/videoReducer.js";
+import AddItemForm                  from "../common/AddItemForm/AddItemForm.jsx";
+import VideoItem                    from "./VideoItem/VideoItem.jsx";
+import VideoModal                   from "./VideoModal/VideoModal.jsx";
+import styles                       from './VideoPage.module.scss'
 
-/* https://www.googleapis.com/youtube/v3/videos?part=snippet&id=7NU6K4170As&key=AIzaSyDSQa6HWWvzckM7b9qoxgnhc-JOAdQ0QsQ */
 
 const VideoPage = ({videos, addVideo, getVideos}) => {
+   const [modalLink, setModalLink] = useState('')
+
+   const openModal = link => {
+      setModalLink(link)
+   }
+   const closeModal = () => {
+      setModalLink('')
+   }
 
    useEffect(() => {
       getVideos()
@@ -14,11 +23,17 @@ const VideoPage = ({videos, addVideo, getVideos}) => {
 
    return (
       <div className="page-section">
+         {modalLink && <VideoModal link={modalLink} closeModal={closeModal}/>}
          <h3>Видео для просмотра</h3>
          <AddItemForm onSend={addVideo} placeholder={'Ссылка на видео'}/>
-         {
-            videos && videos.map(v => <div key={v._id}>{v.name}</div>)
-         }
+         <div className={styles.videosList}>
+            {
+               videos && videos.map(item => <VideoItem key={item._id} item={item} modalOpen={openModal}/>)
+            }
+         </div>
+
+         <hr/>
+         <h3>фильтр переиспользуемый, с поиском и выбором значения для вывода на экран</h3>
       </div>
    );
 }

@@ -34,7 +34,7 @@ export const useRoutes = isAuthenticated => {
                      <h1>projects</h1>
                   </Route>
                   <Route path="/english">
-                     <h1>english</h1>
+                     <h1>english - yandex translate api</h1>
                   </Route>
                   <Route path="/"
                          render={() => <Redirect from='/' to='/todo'/>}/>

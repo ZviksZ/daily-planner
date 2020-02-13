@@ -2,7 +2,8 @@ import {videoAPI}       from "../api/api.js";
 import {getYoutubeId}   from "../utils";
 import {getGlobalError} from "./appReducer.js";
 
-const SET_VIDEOS = 'my-social-network/todos/SET_VIDEOS';
+const SET_VIDEOS = 'my-social-network/videos/SET_VIDEOS';
+const ADD_VIDEO = 'my-social-network/videos/ADD_VIDEO';
 
 let initialState = {
    videos: [],
@@ -17,13 +18,14 @@ const videoReducer = (state = initialState, action) => {
             videos: action.videos
          }
       }
-      /*
-      case ADD_TODO: {
+
+      case ADD_VIDEO: {
          return {
             ...state,
-            todos: [...state.todos, action.todo]
+            videos: [...state.videos, action.video]
          }
       }
+      /*
       case DELETE_TODO: {
          return {
             ...state,
@@ -58,6 +60,7 @@ const videoReducer = (state = initialState, action) => {
 }
 
 export const setVideos = videos => ({type: SET_VIDEOS, videos})
+export const addVideoItem = video => ({type: ADD_VIDEO, video})
 /*
 export const addTodo = todo => ({type: ADD_TODO, todo})
 export const deleteTodoItem = todoId => ({type: DELETE_TODO, todoId})
@@ -68,7 +71,6 @@ export const completedTodoItem = (todoId, completed) => ({type: COMPLETED_TODO, 
 export const getVideos = () => async (dispatch) => {
    try {
       let response = await videoAPI.getVideos()
-      console.log(response)
       dispatch(setVideos(response))
    } catch (error) {
       dispatch(getGlobalError(error.response.data.message))
@@ -78,11 +80,12 @@ export const addVideo = (url) => async dispatch => {
    try {
       let videoId = getYoutubeId(url)
       let videoData = await videoAPI.getDataById(videoId)
+      let newLink = 'https://www.youtube.com/embed/' + videoId
       const {title, channelTitle} = videoData.items[0].snippet
-      const previewImg = videoData.items[0].snippet.thumbnails.high.url
-      let response = await videoAPI.addVideo(url, title, channelTitle, previewImg)
-      console.log(response)
-      /*dispatch(addTodo(response.data.todo))*/
+      const previewImg = videoData.items[0].snippet.thumbnails.medium.url
+      console.log(newLink)
+      let response = await videoAPI.addVideo(newLink, title, channelTitle, previewImg)
+      dispatch(addVideoItem(response.data.video))
    } catch (error) {
       dispatch(getGlobalError(error.response.data.message))
    }
