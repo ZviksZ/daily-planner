@@ -19,15 +19,16 @@ const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus}) => {
          <p>{item.channelTitle}</p>
          <p>
             <span>Статус: </span>
-            <span></span>
-            {
-               item.status === 'unviewed'
-                  ? 'Непросмотренно'
-                  : item.status === 'viewed'
-                  ? 'Просмотренно'
-                  : item.status === 'repeat'
-                  ? 'На повтор' : 'Без статуса'
-            }
+            <span>
+               {
+                  item.status === 'unviewed'
+                     ? 'Непросмотренно'
+                     : item.status === 'viewed'
+                     ? 'Просмотренно'
+                     : item.status === 'repeat'
+                        ? 'На повтор' : 'Без статуса'
+               }
+            </span>
          </p>
          <div>
             <select value={select} onChange={changeStatus}>

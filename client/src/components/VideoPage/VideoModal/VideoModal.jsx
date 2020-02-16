@@ -6,6 +6,7 @@ const VideoModal = ({link, closeModal}) => {
       <div className={styles.videoModal}>
          <div className={styles.videoWrap}>
             <iframe src={link}
+                    title="daily-planner video"
                     width="560" height="315"
                     frameBorder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

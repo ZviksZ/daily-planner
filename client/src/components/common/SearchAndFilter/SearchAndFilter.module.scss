@@ -1,0 +1,54 @@
+.searchFilter {
+    position: relative;
+    text-align: center;
+    margin: 25px 0;
+    .searchInput {
+        border: 1px solid rgba(255, 130, 0, 0.29);
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        background: #ffffff !important;
+        outline: none;
+        height: 24px;
+        width: 80%;
+        margin: 0 auto;
+        color: #cccccc;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 20px 15px;
+        &:focus {
+            color: #000000;
+            border: 1px solid #ff8600
+        }
+    }
+    .filterBtn {
+        position: absolute;
+        right: -10px;
+        top: 0;
+        color: #83888b;
+        cursor: pointer;
+        &.filterBtnOpen {
+            color: #ff8600;
+        }
+    }
+    .filtersList {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin-top: 20px;
+        .filterItem {
+            border: 1px solid #83888b;
+            cursor: pointer;
+            padding: 6px 12px;
+            margin: 0 5px;
+            border-radius: 3px;
+            &.activeFilterItem {
+                border: 1px solid #ff8600;
+                background: #ff8600;
+                color: #ffffff;
+            }
+        }
+    }
+
+}

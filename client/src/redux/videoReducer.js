@@ -6,9 +6,18 @@ const SET_VIDEOS = 'my-social-network/videos/SET_VIDEOS';
 const ADD_VIDEO = 'my-social-network/videos/ADD_VIDEO';
 const DELETE_VIDEO = 'my-social-network/videos/DELETE_VIDEO';
 const UPDATE_VIDEO_STATUS = 'my-social-network/videos/UPDATE_VIDEO_STATUS';
+const SET_CURRENT_FILTER = 'my-social-network/videos/SET_CURRENT_FILTER';
+const SET_SEARCH = 'my-social-network/videos/SET_SEARCH';
 
 let initialState = {
    videos: [],
+   search: '',
+   currentFilter: '',
+   filterList: [
+      {name: 'unviewed',rus: 'Непросмотренно'},
+      {name: 'viewed',rus: 'Просмотренно'},
+      {name: 'repeat',rus: 'На повтор' }
+   ]
 };
 
 const videoReducer = (state = initialState, action) => {
@@ -34,7 +43,6 @@ const videoReducer = (state = initialState, action) => {
             videos: state.videos.filter(video => video._id !== action.videoId)
          }
       }
-
       case UPDATE_VIDEO_STATUS: {
          return {
             ...state,
@@ -46,18 +54,18 @@ const videoReducer = (state = initialState, action) => {
             })
          }
       }
-      /*
-      case COMPLETED_TODO: {
+      case SET_CURRENT_FILTER: {
          return {
             ...state,
-            todos: state.todos.map(todo => {
-               if (todo._id === action.todoId) {
-                  return { ...todo, completed: action.completed }
-               }
-               return todo
-            })
+            currentFilter: action.filter
          }
-      }*/
+      }
+      case SET_SEARCH: {
+         return {
+            ...state,
+            search: action.search
+         }
+      }
       default:
          return state;
    }
@@ -67,6 +75,8 @@ export const setVideos = videos => ({type: SET_VIDEOS, videos})
 export const addVideoItem = video => ({type: ADD_VIDEO, video})
 export const deleteVideoItem = videoId => ({type: DELETE_VIDEO, videoId})
 export const updateVideoItem = (videoId, status) => ({type: UPDATE_VIDEO_STATUS, videoId, status})
+export const setFilter = filter => ({type: SET_CURRENT_FILTER, filter})
+export const setSearch = search => ({type: SET_SEARCH, search})
 
 
 export const getVideos = () => async (dispatch) => {
@@ -84,7 +94,6 @@ export const addVideo = (url) => async dispatch => {
       let newLink = 'https://www.youtube.com/embed/' + videoId
       const {title, channelTitle} = videoData.items[0].snippet
       const previewImg = videoData.items[0].snippet.thumbnails.medium.url
-      console.log(newLink)
       let response = await videoAPI.addVideo(newLink, title, channelTitle, previewImg)
       dispatch(addVideoItem(response.data.video))
    } catch (error) {
@@ -109,23 +118,7 @@ export const updateVideoStatus = (videoId, status) => async dispatch => {
       dispatch(getGlobalError(error.response.data.message))
    }
 }
-/*export const deleteTodo = (todoId) => async dispatch => {
-   try {
-      await todosAPI.deleteTodo(todoId)
-      dispatch(deleteTodoItem(todoId))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
 
-export const completeTodo = (todoId, completed) => async dispatch => {
-   try {
-      await todosAPI.completeTodo(todoId, completed)
-      dispatch(completedTodoItem(todoId, completed))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}*/
 
 
 export default videoReducer;

@@ -12,7 +12,6 @@ let initialState = {
 };
 
 const todosReducer = (state = initialState, action) => {
-
    switch (action.type) {
       case SET_TODOS: {
          return {
@@ -25,7 +24,7 @@ const todosReducer = (state = initialState, action) => {
             ...state,
             todos: [...state.todos, action.todo]
          }
-      } 
+      }
       case DELETE_TODO: {
          return {
             ...state,
@@ -37,23 +36,23 @@ const todosReducer = (state = initialState, action) => {
             ...state,
             todos: state.todos.map(todo => {
                if (todo._id === action.todoId) {
-                  return { ...todo, title: action.title }                  
+                  return { ...todo, title: action.title }
                }
                return todo
             })
          }
-      } 
+      }
       case COMPLETED_TODO: {
          return {
             ...state,
             todos: state.todos.map(todo => {
                if (todo._id === action.todoId) {
-                  return { ...todo, completed: action.completed }                  
+                  return { ...todo, completed: action.completed }
                }
                return todo
             })
          }
-      }    
+      }
       default:
          return state;
    }
