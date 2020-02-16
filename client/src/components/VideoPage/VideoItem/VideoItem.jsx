@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styles            from '../VideoPage.module.scss'
+import { FaWindowClose } from "react-icons/fa";
 
 const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus}) => {
    const [select, setSelect] = useState(item.status)
@@ -36,7 +37,9 @@ const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus}) => {
                <option value='viewed'>Просмотренно</option>
                <option value='repeat'>На повтор</option>
             </select>
-            <button onClick={() => deleteVideo(item._id)}>Удалить</button>
+            <button onClick={() => deleteVideo(item._id)}>
+               <FaWindowClose/>
+            </button>
          </div>
       </div>
    );

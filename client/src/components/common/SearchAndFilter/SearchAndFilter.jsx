@@ -1,23 +1,20 @@
-import React, {useState}   from 'react';
-import styles              from './SearchAndFilter.module.scss'
-import cn                  from "classnames";
-import {FaFilter}          from "react-icons/fa";
-import SearchAndFilterItem from "./SearchAndFilterItem/SearchAndFilterItem.jsx";
+import React, {useEffect, useState} from 'react';
+import styles                       from './SearchAndFilter.module.scss'
+import cn                           from "classnames";
+import {FaFilter}                   from "react-icons/fa";
+import SearchAndFilterItem          from "./SearchAndFilterItem/SearchAndFilterItem.jsx";
 
 const SearchAndFilter = ({onSearch, onFilter, filterItems, defaultFilter}) => {
    const [title, setTitle] = useState('');
    const [isOpen, setIsOpen] = useState(false)
 
    const handleChange = e => {
-      if (e.target.value) {
-         setTitle(e.target.value)
-         onSearch(title)
-      } else {
-         setTitle('')
-         onSearch('')
-      }
-
+      setTitle(e.target.value)
    }
+   useEffect(() => {
+      onSearch(title)
+   }, [title]);
+
    const toggleOpen = () => {
       setIsOpen(!isOpen)
    }
@@ -26,6 +23,7 @@ const SearchAndFilter = ({onSearch, onFilter, filterItems, defaultFilter}) => {
       <div className={styles.searchFilter}>
          <FaFilter onClick={toggleOpen}
                    title="Поиск и фильтр"
+                   size={'1.8rem'}
                    className={cn({[styles.filterBtnOpen]: isOpen}, styles.filterBtn)}/>
          {isOpen &&
          <>

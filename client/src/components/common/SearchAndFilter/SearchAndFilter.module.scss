@@ -24,12 +24,17 @@
     }
     .filterBtn {
         position: absolute;
-        right: -10px;
+        right: -30px;
         top: 0;
         color: #83888b;
         cursor: pointer;
         &.filterBtnOpen {
             color: #ff8600;
+        }
+        @media screen and (min-width: 1000px){
+            &:hover {
+                color: #ff8600;
+            }
         }
     }
     .filtersList {
@@ -47,6 +52,13 @@
                 border: 1px solid #ff8600;
                 background: #ff8600;
                 color: #ffffff;
+            }
+            @media screen and (min-width: 1000px) {
+                &:hover {
+                    border: 1px solid #ff8600;
+                    background: #ff8600;
+                    color: #ffffff;
+                }
             }
         }
     }

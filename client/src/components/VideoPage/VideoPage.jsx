@@ -6,10 +6,13 @@ import AddItemForm                                                              
 import SearchAndFilter                                                             from "../common/SearchAndFilter/SearchAndFilter.jsx";
 import VideoItem                                                                   from "./VideoItem/VideoItem.jsx";
 import VideoModal                                                                  from "./VideoModal/VideoModal.jsx";
-import styles                                                           from './VideoPage.module.scss'
+import styles                                                                      from './VideoPage.module.scss'
 
 
-const VideoPage = ({setSearch, setFilter, filterList, currentFilter, videos, addVideo, getVideos, deleteVideo, updateVideoStatus}) => {
+const VideoPage = ({
+                      setSearch, setFilter, filterList, currentFilter,
+                      videos, addVideo, getVideos, deleteVideo, updateVideoStatus
+                   }) => {
 
    const [modalLink, setModalLink] = useState('')
 
@@ -29,7 +32,10 @@ const VideoPage = ({setSearch, setFilter, filterList, currentFilter, videos, add
          {modalLink && <VideoModal link={modalLink} closeModal={closeModal}/>}
          <h3>Видео для просмотра</h3>
          <AddItemForm onSend={addVideo} placeholder={'Ссылка на видео'}/>
-          <SearchAndFilter onSearch={setSearch} filterItems={filterList} defaultFilter={currentFilter} onFilter={setFilter}/>
+         <SearchAndFilter onSearch={setSearch}
+                          filterItems={filterList}
+                          defaultFilter={currentFilter}
+                          onFilter={setFilter}/>
          <div className={styles.videosList}>
             {
                videos && videos.map(item => <VideoItem key={item._id}
@@ -49,7 +55,6 @@ const VideoPage = ({setSearch, setFilter, filterList, currentFilter, videos, add
       </div>
    );
 }
-
 
 
 let mapStateToProps = (state) => {
