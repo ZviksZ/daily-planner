@@ -83,8 +83,9 @@ export const createTodo = (title) => async dispatch => {
 }
 export const deleteTodo = (todoId) => async dispatch => {
    try {
-      await todosAPI.deleteTodo(todoId)
-      dispatch(deleteTodoItem(todoId))
+      let response = await todosAPI.deleteTodo(todoId)
+
+      dispatch(deleteTodoItem(response.data.message._id))
    } catch (error) {
       dispatch(getGlobalError(error.response.data.message))
    }

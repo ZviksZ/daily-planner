@@ -4,12 +4,12 @@ import {getTodosCompleted, getTodosNoCompleted}                     from "../../
 import {completeTodo, createTodo, deleteTodo, getTodos, updateTodo} from "../../redux/todoReducer.js";
 import AddItemForm                                                  from "../common/AddItemForm/AddItemForm.jsx";
 import Loader                                                       from "../common/Loader/Loader.jsx";
-import TodoItem                                                     from "./TodoItem/TodoItem.jsx";
+import TodoList                                                     from "./TodoList/TodoList.jsx";
 import styles                                                       from './TodosPage.module.scss'
 
 const TodosPage = ({completedTodos, noCompletedTodos, getTodos,
                       createTodo, deleteTodo, loading,
-                      todos, updateTodo, completeTodo}) => {
+                      todos, updateTodo, completeTodo }) => {
    useEffect(() => {
       getTodos()
    }, [getTodos])
@@ -23,28 +23,12 @@ const TodosPage = ({completedTodos, noCompletedTodos, getTodos,
          <AddItemForm onSend={createTodo} placeholder={'Введите новую задачу'}/>
          <div className={styles.todosList}>
             <div className={styles.todoInWork}>
-               <h4>На выполнении</h4>
-               {noCompletedTodos.length
-                     ? noCompletedTodos.map(todo => <TodoItem key={todo._id}
-                                                              todo={todo}
-                                                              updateTodo={updateTodo}
-                                                              deleteTodoItem={deleteTodo}
-                                                              completeTodo={completeTodo}/>)
-                     :
-                     <div>Здесь пока ничего нет</div>
-               }
+               <TodoList updateTodo={updateTodo} deleteTodo={deleteTodo} completeTodo={completeTodo}
+                         list={noCompletedTodos} title={'На выполнении'}/>
             </div>
             <div className={styles.todoCompleted}>
-               <h4>Завершенные</h4>
-               {completedTodos.length
-                     ? completedTodos.map(todo => <TodoItem key={todo._id}
-                                                            todo={todo}
-                                                            updateTodo={updateTodo}
-                                                            deleteTodoItem={deleteTodo}
-                                                            completeTodo={completeTodo}/>)
-                     :
-                     <div>Здесь пока ничего нет</div>
-               }
+               <TodoList updateTodo={updateTodo} deleteTodo={deleteTodo} completeTodo={completeTodo}
+                         list={completedTodos} title={'Завершенные'}/>
             </div>
          </div>
       </div>

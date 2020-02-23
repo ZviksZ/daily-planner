@@ -2,6 +2,7 @@ import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
+import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";
 import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
 import VideoPage                 from "./components/VideoPage/VideoPage.jsx";
@@ -34,7 +35,7 @@ export const useRoutes = isAuthenticated => {
                      <h1>projects</h1>
                   </Route>
                   <Route path="/english">
-                     <h1>english - yandex translate api</h1>
+                     <EnglishPage/>
                   </Route>
                   <Route path="/"
                          render={() => <Redirect from='/' to='/todo'/>}/>

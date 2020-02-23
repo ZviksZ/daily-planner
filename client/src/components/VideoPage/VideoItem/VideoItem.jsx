@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import styles            from '../VideoPage.module.scss'
-import { FaWindowClose } from "react-icons/fa";
+import VideoItemEdit     from "./VideoItemEdit.jsx";
+import VideoItemStatus   from "./VideoItemStatus.jsx";
 
-const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus}) => {
+const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus, filterList}) => {
    const [select, setSelect] = useState(item.status)
+   const [editMode, setEditMode] = useState(false)
 
-   const changeStatus = e => {
-      e.preventDefault()
-      setSelect(e.target.value)
-      updateVideoStatus(item._id, e.target.value)
+   const changeStatus = val => {
+      setSelect(val.value)
+      updateVideoStatus(item._id, val.value)
    }
-
    return (
       <div className={styles.videoItem} id={item._id}>
          <img src={item.previewImg} alt=""
@@ -18,29 +18,9 @@ const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus}) => {
               onClick={() => modalOpen(item.link)}/>
          <h4>{item.name}</h4>
          <p>{item.channelTitle}</p>
-         <p>
-            <span>Статус: </span>
-            <span>
-               {
-                  item.status === 'unviewed'
-                     ? 'Непросмотренно'
-                     : item.status === 'viewed'
-                     ? 'Просмотренно'
-                     : item.status === 'repeat'
-                        ? 'На повтор' : 'Без статуса'
-               }
-            </span>
-         </p>
-         <div>
-            <select value={select} onChange={changeStatus}>
-               <option value='unviewed'>Непросмотренно</option>
-               <option value='viewed'>Просмотренно</option>
-               <option value='repeat'>На повтор</option>
-            </select>
-            <button onClick={() => deleteVideo(item._id)}>
-               <FaWindowClose/>
-            </button>
-         </div>
+         <VideoItemStatus status={item.status}/>
+         <VideoItemEdit changeStatus={changeStatus} deleteVideo={deleteVideo} editMode={editMode}
+                        filterList={filterList} select={select} itemId={item._id} setEditMode={setEditMode}/>
       </div>
    );
 }

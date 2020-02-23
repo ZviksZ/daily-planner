@@ -57,3 +57,18 @@ export const videoAPI = {
       return instance.put(`/api/video/${videoId}`, {status: status});
    }
 }
+
+export const englishAPI = {
+   translateYandex(word) {
+      return axios.get(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200212T054253Z.c2b665f20c687880.da3ba37cb9c34d1b71b0757a10fb2957f3aaffa5&text=${word}&lang=ru`)
+   },
+   getDictionary() {
+      return instance.get(`/api/english`).then(response => response.data);
+   },
+   addWordToDictionary(wordEng, wordRu) {
+      return instance.post(`/api/english/generate`, {wordEng, wordRu});
+   },
+   deleteWord(wordId) {
+      return instance.delete(`/api/english/${wordId}`);
+   }
+}

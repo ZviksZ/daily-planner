@@ -9,8 +9,7 @@ import VideoModal                                                               
 import styles                                                                      from './VideoPage.module.scss'
 
 
-const VideoPage = ({
-                      setSearch, setFilter, filterList, currentFilter,
+const VideoPage = ({setSearch, setFilter, filterList, currentFilter,
                       videos, addVideo, getVideos, deleteVideo, updateVideoStatus
                    }) => {
 
@@ -42,16 +41,10 @@ const VideoPage = ({
                                                        deleteVideo={deleteVideo}
                                                        updateVideoStatus={updateVideoStatus}
                                                        item={item}
+                                                       filterList={filterList}
                                                        modalOpen={openModal}/>)
             }
          </div>
-
-         <hr/>
-         <h3>
-            пагинация - сделать универсальную
-            фильтр переиспользуемый, с поиском и выбором значения для вывода на экран
-         </h3>
-
       </div>
    );
 }

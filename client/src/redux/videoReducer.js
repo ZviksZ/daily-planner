@@ -14,9 +14,9 @@ let initialState = {
    search: '',
    currentFilter: '',
    filterList: [
-      {name: 'unviewed',rus: 'Непросмотренно'},
-      {name: 'viewed',rus: 'Просмотренно'},
-      {name: 'repeat',rus: 'На повтор' }
+      {value: 'unviewed',label: 'Непросмотренно'},
+      {value: 'viewed',label: 'Просмотренно'},
+      {value: 'repeat',label: 'На повтор' }
    ]
 };
 
@@ -103,16 +103,17 @@ export const addVideo = (url) => async dispatch => {
 
 export const deleteVideo = (videoId) => async dispatch => {
    try {
-      await videoAPI.deleteVideo(videoId)
-      dispatch(deleteVideoItem(videoId))
+      let response = await videoAPI.deleteVideo(videoId)
+
+      dispatch(deleteVideoItem(response.data.message._id))
    } catch (error) {
       dispatch(getGlobalError(error.response.data.message))
    }
 }
 export const updateVideoStatus = (videoId, status) => async dispatch => {
    try {
-      let response = await videoAPI.updateVideoStatus(videoId, status)
-      console.log(response)
+      await videoAPI.updateVideoStatus(videoId, status)
+
       dispatch(updateVideoItem(videoId, status))
    } catch (error) {
       dispatch(getGlobalError(error.response.data.message))

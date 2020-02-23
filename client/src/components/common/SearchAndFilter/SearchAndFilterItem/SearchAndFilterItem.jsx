@@ -8,9 +8,9 @@ const SearchAndFilterItem = ({filter, onFilter, currentFilter}) => {
    }
    return (
       <li onClick={handleClick}
-          data-value={filter.name}
-          className={cn({[styles.activeFilterItem]: currentFilter === filter.name}, styles.filterItem)}>
-         {filter.rus}
+          data-value={filter.value}
+          className={cn({[styles.activeFilterItem]: currentFilter === filter.value}, styles.filterItem)}>
+         {filter.label}
       </li>
    );
 }

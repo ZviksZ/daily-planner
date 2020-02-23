@@ -52,3 +52,20 @@ body {
     margin-bottom: 20px;
   }
 }
+.customSelect {
+  width: 100%;
+  margin: 10px 0;
+  &__control {
+    &:hover {
+      border-color: #ff8600 !important;
+      outline: none !important;
+      box-shadow: 0 0 0 1px #ff8600 !important;
+    }
+  }
+  &__control--is-focused, &__control--menu-is-open {
+    border-color: #ff8600 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 1px #ff8600 !important;
+  }
+
+}
