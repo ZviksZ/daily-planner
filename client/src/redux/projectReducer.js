@@ -45,7 +45,13 @@ let initialState = {
       {value: 'local-storage', label: 'Local Storage'},
       {value: 'firebase', label: 'Firebase'},
       {value: 'heroku', label: 'Heroku'},
-      {value: 'netlify', label: 'Netlify'}
+      {value: 'netlify', label: 'Netlify'},
+      {value: 'mongoose', label: 'Mongoose'},
+      {value: 'bcryptjs', label: 'BcryptJs'},
+      {value: 'express', label: 'Express'},
+      {value: 'express-validator', label: 'Express-validator'},
+      {value: 'jsonwebtoken', label: 'Jsonwebtoken'},
+      {value: 'shortid', label: 'ShortId'}
    ]
 };
 
