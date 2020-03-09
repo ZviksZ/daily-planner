@@ -25,15 +25,9 @@ const Sidebar = ({logout}) => {
             <NavLink to='/videos'
                      className={styles.links}
                      activeClassName={styles.activeLink}>Видео для обучения</NavLink>
-            <NavLink to='/features'
-                     className={styles.links}
-                     activeClassName={styles.activeLink}>Полезности</NavLink>
             <NavLink to='/patterns'
                      className={styles.links}
                      activeClassName={styles.activeLink}>Паттерны и лучшие практики</NavLink>
-            <NavLink to='/semantic'
-                     className={styles.links}
-                     activeClassName={styles.activeLink}>Семантика html,css,js</NavLink>
             <NavLink to='/projects'
                      className={styles.links}
                      activeClassName={styles.activeLink}>Мои проекты</NavLink>

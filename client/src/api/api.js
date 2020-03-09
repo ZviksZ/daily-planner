@@ -72,3 +72,26 @@ export const englishAPI = {
       return instance.delete(`/api/english/${wordId}`);
    }
 }
+
+export const projectAPI = {
+   getProjects() {
+      return instance.get(`/api/project`).then(response => response.data);
+   },
+   createProject(technologies, description, demoLink, gitLink) {
+      return instance.post(`/api/project/generate`, {
+         technologies: technologies,
+         description: description,
+         demoLink: demoLink,
+         gitLink: gitLink
+      });
+   },
+  /* deleteTodo(todoId) {
+      return instance.delete(`/api/todo/${todoId}`);
+   },
+   updateTodo(todoId, title) {
+      return instance.put(`/api/todo/${todoId}`, {title: title});
+   },
+   completeTodo(todoId, completed) {
+      return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
+   }*/
+}

@@ -2,6 +2,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware                                 from 'redux-thunk';
 import appReducer                                      from "./appReducer";
 import englishReducer                                  from "./englishReducer.js";
+import projectReducer                                  from "./projectReducer.js";
 import todoReducer                                     from "./todoReducer";
 import authReducer                                     from "./authReducer";
 import videoReducer                                    from "./videoReducer.js";
@@ -12,7 +13,8 @@ let reducers = combineReducers({
    authPage: authReducer,
    todoPage: todoReducer,
    videoPage: videoReducer,
-   englishPage: englishReducer
+   englishPage: englishReducer,
+   projectPage: projectReducer
 });
 
 

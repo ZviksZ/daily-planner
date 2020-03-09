@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
+import ProjectPage               from "./components/ProjectPage/ProjectPage.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";
 import TodosPage                 from "./components/TodosPage/TodosPage.jsx";
 import VideoPage                 from "./components/VideoPage/VideoPage.jsx";
@@ -22,17 +23,11 @@ export const useRoutes = isAuthenticated => {
                   <Route path="/videos">
                      <VideoPage/>
                   </Route>
-                  <Route path="/features">
-                     <h1>features</h1>
-                  </Route>
                   <Route path="/patterns">
                      <h1>patterns</h1>
                   </Route>
-                  <Route path="/semantic">
-                     <h1>semantic</h1>
-                  </Route>
                   <Route path="/projects">
-                     <h1>projects</h1>
+                     <ProjectPage/>
                   </Route>
                   <Route path="/english">
                      <EnglishPage/>
