@@ -45,7 +45,7 @@ export const videoAPI = {
       return instance.get(`/api/video`).then(response => response.data);
    },
    getDataById(videoId) {
-      return axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyA94xmO9loRS3OEzwickWE2Y8Sk2m2DqN0`).then(response => response.data);
+      return axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=AIzaSyDqMbxsgV4RygfAELf7wulWJqhytHw7odk`).then(response => response.data);
    },
    addVideo(link, name, channelTitle, previewImg) {
       return instance.post(`/api/video/generate`, {link, name, channelTitle, previewImg});
@@ -85,9 +85,18 @@ export const projectAPI = {
          gitLink: gitLink
       });
    },
-  /* deleteTodo(todoId) {
-      return instance.delete(`/api/todo/${todoId}`);
+   deleteProject(projectId) {
+      return instance.delete(`/api/project/${projectId}`);
    },
+   updateProject(technologies, description, demoLink, gitLink, projectId) {
+      return instance.put(`/api/project/${projectId}`, {
+         technologies: technologies,
+         description: description,
+         demoLink: demoLink,
+         gitLink: gitLink
+      });
+   },
+  /*
    updateTodo(todoId, title) {
       return instance.put(`/api/todo/${todoId}`, {title: title});
    },

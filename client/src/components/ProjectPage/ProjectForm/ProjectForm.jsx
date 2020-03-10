@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Select            from "react-select";
 import styles            from "../../VideoPage/VideoPage.module.scss";
 
-const ProjectForm = ({createProject, technologiesOptions, project = {}}) => {
+const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}}) => {
    const [technologies, setTechnologies] = useState(project.technologies || null);
    const [description, setDescription] = useState(project.description || '');
    const [demoLink, setDemoLink] = useState(project.demoLink || '');
@@ -28,7 +28,11 @@ const ProjectForm = ({createProject, technologiesOptions, project = {}}) => {
 
    const onSubmit = e => {
       e.preventDefault()
-      createProject(technologies,description,demoLink,gitLink)
+      if (project !== {}) {
+         onSubmitHandler(technologies,description,demoLink,gitLink, project._id)
+      } else {
+         onSubmitHandler(technologies,description,demoLink,gitLink)
+      }
       setDescription('')
       setDemoLink('')
       setGitLink('')

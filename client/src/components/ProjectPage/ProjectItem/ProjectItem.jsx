@@ -7,18 +7,21 @@ import { FaPen } from "react-icons/fa";
 import { MdRefresh } from "react-icons/md";
 import { TiCancel } from "react-icons/ti";
 
-const ProjectItem = ({project, technologiesOptions}) => {
+const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateTodo}) => {
    const [editMode, setEditMode] = useState(false)
 
    return (
-      <div>
+      <div className={styles.projectItem}>
          {
             editMode
                ? <>
-                  <ProjectForm project={project} technologiesOptions={technologiesOptions}/>
+                  <ProjectForm onSubmitHandler={updateTodo} project={project} technologiesOptions={technologiesOptions}/>
                   <div className={styles.btnBlock}>
-                     <MdRefresh title="Внести изменения" onClick={() => console.log('111')} className={styles.editBtn} size={'1.8rem'}/>
-                     <TiCancel title="Отменить редактирование" onClick={() => setEditMode(false)} className={styles.closeBtn} size={'2rem'}/>
+                     <div className="btns">
+                        {/*<MdRefresh title="Внести изменения" onClick={() => console.log('111')} className="editBtn" size={'1.8rem'}/>*/}
+                        <TiCancel title="Отменить редактирование" onClick={() => setEditMode(false)} className="closeBtn" size={'2rem'}/>
+
+                     </div>
                   </div>
                </>
                : <>
@@ -26,7 +29,7 @@ const ProjectItem = ({project, technologiesOptions}) => {
                      <div>О проекте:{project.description}</div>
                      <ul>
                         {
-                           project.technologies && project.technologies.map(t => <li id={t.value}>{t.label}</li>)
+                           project.technologies && project.technologies.map(t => <li key={t.value}>{t.label}</li>)
                         }
                      </ul>
                      <div>
@@ -37,8 +40,10 @@ const ProjectItem = ({project, technologiesOptions}) => {
                      </div>
                   </div>
                   <div className={styles.btnBlock}>
-                     <FaPen title="Редактировать" onClick={() => setEditMode(true)} className={styles.editBtn} size={'1.2rem'}/>
-                     <FaWindowClose title="Удалить" onClick={() => console.log('111')} className={styles.closeBtn} size={'1.6rem'}/>
+                     <div className="btns">
+                        <FaPen title="Редактировать" onClick={() => setEditMode(true)} className="editBtn" size={'1.2rem'}/>
+                        <FaWindowClose title="Удалить" onClick={() => deleteProjectItem(project._id)} className="closeBtn" size={'1.6rem'}/>
+                     </div>
                   </div>
                </>
          }

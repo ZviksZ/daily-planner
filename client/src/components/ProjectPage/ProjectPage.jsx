@@ -1,22 +1,30 @@
-import React, {useEffect}           from 'react';
-import {connect}                    from "react-redux";
-import {createProject, getProjects} from "../../redux/projectReducer.js";
-import ProjectForm                  from "./ProjectForm/ProjectForm.jsx";
-import ProjectItem                  from "./ProjectItem/ProjectItem.jsx";
-import styles                       from './ProjectPage.module.scss'
+import React, {useEffect, useState}                                from 'react';
+import {connect}                                                   from "react-redux";
+import {createProject, deleteProjectItem, getProjects, updateTodo} from "../../redux/projectReducer.js";
+import ProjectForm                                                 from "./ProjectForm/ProjectForm.jsx";
+import ProjectItem                                                 from "./ProjectItem/ProjectItem.jsx";
+import styles                                                      from './ProjectPage.module.scss'
 
-const ProjectPage = ({projects, technologiesOptions, getProjects, createProject}) => {
+const ProjectPage = ({projects, technologiesOptions, getProjects, createProject, deleteProjectItem, updateTodo}) => {
+   const [addMode, setAddMode] = useState(false)
+
    useEffect(() => {
       getProjects()
    }, [])
 
    return (
       <div className={styles.projectPage}>
-         <ProjectForm createProject={createProject} technologiesOptions={technologiesOptions}/>
-
          {
-            projects && projects.map(p => <ProjectItem project={p} technologiesOptions={technologiesOptions}/>)
+            addMode ? <button onClick={() => setAddMode(false)}>Отменить</button> : <button onClick={() => setAddMode(true)}>Добавить проект</button>
          }
+         {
+            addMode && <ProjectForm createProject={createProject} technologiesOptions={technologiesOptions}/>
+         }
+         <div className={styles.projectList}>
+            {
+               projects && projects.map(p => <ProjectItem key={p._id} updateTodo={updateTodo} deleteProjectItem={deleteProjectItem} project={p} technologiesOptions={technologiesOptions}/>)
+            }
+         </div>
       </div>
    );
 }
@@ -28,4 +36,4 @@ let mapStateToProps = (state) => {
    }
 }
 
-export default connect(mapStateToProps, {getProjects, createProject})(ProjectPage)
+export default connect(mapStateToProps, {getProjects, createProject, deleteProjectItem, updateTodo})(ProjectPage)

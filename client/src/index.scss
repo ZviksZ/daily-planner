@@ -88,3 +88,31 @@ input, textarea {
     border: 1px solid #ff8600
   }
 }
+
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  svg {
+    margin: 0 5px;
+  }
+  .closeBtn {
+    color: #83888b;
+    cursor: pointer;
+    transition: 0s;
+    &:hover {
+      color: #e16c80;
+    }
+  }
+  .editBtn {
+    color: #83888b;
+    cursor: pointer;
+    transition: 0s;
+    &:hover {
+      color: #ff8600;
+    }
+  }
+}
+

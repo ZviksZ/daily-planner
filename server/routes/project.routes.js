@@ -28,10 +28,10 @@ router.get('/', auth, async (req, res) => {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }
 })
-/*
+
 router.delete("/:id", auth, async (req, res)=>{
    try {
-      const message = await Todo
+      const message = await Project
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
       res.json({ message });
@@ -42,8 +42,13 @@ router.delete("/:id", auth, async (req, res)=>{
 
 router.put("/:id", auth, async (req, res)=>{
    try {
-      const message = await Todo
-         .updateOne({owner: req.user.userId, _id: req.params.id}, { title: req.body.title})
+      const message = await Project
+         .updateOne({owner: req.user.userId, _id: req.params.id}, {
+            description: req.body.description,
+            technologies: req.body.technologies,
+            demoLink: req.body.demoLink,
+            gitLink: req.body.gitLink
+         })
 
       res.json({ message });
    } catch (e) {
@@ -51,14 +56,11 @@ router.put("/:id", auth, async (req, res)=>{
    }
 });
 
-router.put("/:id/completed", auth, async (req, res)=>{
-   try {
-      const message = await Todo
-         .updateOne({owner: req.user.userId, _id: req.params.id}, { completed: !!req.body.completed})
-      res.json({ message });
-   } catch (e) {
-      res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
-   }
-});*/
+/*
+
+
+
+
+*/
 
 module.exports = router
