@@ -49,7 +49,8 @@ let initialState = {
       {value: 'express', label: 'Express'},
       {value: 'express-validator', label: 'Express-validator'},
       {value: 'jsonwebtoken', label: 'Jsonwebtoken'},
-      {value: 'shortid', label: 'ShortId'}
+      {value: 'shortid', label: 'ShortId'},
+      {value: 'pure-js', label: 'Pure Js'}
    ]
 };
 

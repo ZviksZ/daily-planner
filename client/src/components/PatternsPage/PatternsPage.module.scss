@@ -1,0 +1,129 @@
+.patternsList {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    h4 {
+        margin-bottom: 10px;
+    }
+    .patternItem {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        position: relative;
+        .formGroup {
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .btns {
+            position: absolute;
+            right: -100%;
+            opacity: 0;
+            transition: 0.2s;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            svg {
+                margin: 0 5px;
+            }
+        }
+        &:hover {
+            .btns {
+                right: 50px;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+.formGroup {
+    display: flex;
+    align-items: center;
+}
+
+.formGroup input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.formGroup label {
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    padding-left: 40px;
+    line-height: 1.5;
+}
+
+.formGroup label:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content:'';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid rgba(255, 130, 0, 0.29);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.5s ease;
+}
+
+.formGroup input:checked + label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #ff8600;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+.formGroup input:checked + label:before {
+    border: 2px solid #ff8600;
+}
+.formGroupChecked {
+    label {
+        color: #878787;
+        text-decoration: line-through;
+        font-style: italic;
+    }
+}
+.editField {
+    display: block;
+    margin-bottom: 20px;
+    width: 100px;
+    border: 1px solid rgba(255, 130, 0, 0.29);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    background: #ffffff !important;
+    outline: none;
+    height: 24px;
+    width: 100%;
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 25px 15px;
+    margin-right: 10px;
+    &:focus {
+        color: #000000;
+        border: 1px solid #ff8600
+    }
+}

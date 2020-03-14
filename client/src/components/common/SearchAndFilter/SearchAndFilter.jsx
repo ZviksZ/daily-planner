@@ -4,7 +4,9 @@ import cn                           from "classnames";
 import {FaFilter}                   from "react-icons/fa";
 import SearchAndFilterList          from "./SearchAndFilterList/SearchAndFilterList.jsx";
 
-const SearchAndFilter = ({onSearch, onFilter, filterItems, defaultFilter}) => {
+function noop() {}
+
+const SearchAndFilter = ({onSearch, onFilter = noop, filterItems = [], defaultFilter = '', onlySearch = false}) => {
    const [title, setTitle] = useState('');
    const [isOpen, setIsOpen] = useState(false)
 
@@ -25,7 +27,9 @@ const SearchAndFilter = ({onSearch, onFilter, filterItems, defaultFilter}) => {
                    value={title}
                    placeholder={"Поиск..."}
                    onChange={handleChange}/>
-            <SearchAndFilterList onFilter={onFilter} defaultFilter={defaultFilter} filterItems={filterItems}/>
+            {
+               !onlySearch && <SearchAndFilterList onFilter={onFilter} defaultFilter={defaultFilter} filterItems={filterItems}/>
+            }
          </>
          }
       </div>

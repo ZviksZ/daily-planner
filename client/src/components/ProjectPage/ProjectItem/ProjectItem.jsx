@@ -4,7 +4,6 @@ import styles            from '../ProjectPage.module.scss'
 
 import { FaWindowClose } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
-import { MdRefresh } from "react-icons/md";
 import { TiCancel } from "react-icons/ti";
 
 const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateTodo}) => {
@@ -26,17 +25,17 @@ const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateTod
                </>
                : <>
                   <div>
-                     <div>О проекте:{project.description}</div>
-                     <ul>
+                     <div>О проекте: {project.description}</div>
+                     <ul className={styles.techList}>
                         {
                            project.technologies && project.technologies.map(t => <li key={t.value}>{t.label}</li>)
                         }
                      </ul>
                      <div>
-                        Демо:<a href={project.demoLink} target="_blank">{project.demoLink}</a>
+                        Демо: <a href={project.demoLink} target="_blank" rel="noopener noreferrer" >{project.demoLink}</a>
                      </div>
                      <div>
-                        GitHub:<a href={project.gitLink} target="_blank">{project.gitLink}</a>
+                        GitHub: <a href={project.gitLink} target="_blank" rel="noopener noreferrer" >{project.gitLink}</a>
                      </div>
                   </div>
                   <div className={styles.btnBlock}>

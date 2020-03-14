@@ -10,12 +10,12 @@ const ProjectPage = ({projects, technologiesOptions, getProjects, createProject,
 
    useEffect(() => {
       getProjects()
-   }, [])
+   }, [getProjects])
 
    return (
       <div className={styles.projectPage}>
          {
-            addMode ? <button onClick={() => setAddMode(false)}>Отменить</button> : <button onClick={() => setAddMode(true)}>Добавить проект</button>
+            addMode ? <button onClick={() => setAddMode(false)}>Закрыть форму</button> : <button onClick={() => setAddMode(true)}>Добавить проект</button>
          }
          {
             addMode && <ProjectForm createProject={createProject} technologiesOptions={technologiesOptions}/>

@@ -69,7 +69,7 @@ router.post('/login',
          const token = jwt.sign(
             { userId: user.id },
             "daily planner 23",
-            {expiresIn: '1h'}
+            {expiresIn: '2h'}
          )
 
          res.json({token, userId: user.id})

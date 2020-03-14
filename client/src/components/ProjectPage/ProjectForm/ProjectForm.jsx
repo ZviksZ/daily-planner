@@ -4,38 +4,36 @@ import styles            from "../../VideoPage/VideoPage.module.scss";
 
 const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}}) => {
    const [technologies, setTechnologies] = useState(project.technologies || null);
-   const [description, setDescription] = useState(project.description || '');
-   const [demoLink, setDemoLink] = useState(project.demoLink || '');
-   const [gitLink, setGitLink] = useState(project.gitLink || '');
+   const [values, setValues] = useState({
+      description: project.description || '',
+      demoLink: project.demoLink || '',
+      gitLink: project.gitLink || ''
+   });
 
-   const handleChange = selectedOption => {
-      setTechnologies(selectedOption)
+   const handleChange = event => {
+      const { name, value } = event.target;
+      setValues({
+         ...values,
+         [name]: value
+      });
    };
 
-   const inputChangeHandler = e => {
-      switch (e.target.name) {
-         case 'description':
-            setDescription(e.target.value)
-            break;
-         case 'demoLink':
-            setDemoLink(e.target.value)
-            break;
-         case 'gitLink':
-            setGitLink(e.target.value)
-            break;
-      }
-   }
+   const handleChangeSelect = selectedOption => {
+      setTechnologies(selectedOption)
+   };
 
    const onSubmit = e => {
       e.preventDefault()
       if (project !== {}) {
-         onSubmitHandler(technologies,description,demoLink,gitLink, project._id)
+         onSubmitHandler(technologies, values.description, values.demoLink,values.gitLink, project._id)
       } else {
-         onSubmitHandler(technologies,description,demoLink,gitLink)
+         onSubmitHandler(technologies,values.description,values.demoLink,values.gitLink)
       }
-      setDescription('')
-      setDemoLink('')
-      setGitLink('')
+      setValues({
+         description: '',
+         demoLink: '',
+         gitLink: ''
+      })
       setTechnologies(null)
    }
 
@@ -43,17 +41,17 @@ const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}}) => {
       <div>
          <form onSubmit={onSubmit}>
             <label htmlFor="description">Описание проекта</label>
-            <input name="description" value={description} onChange={inputChangeHandler} required={true}/>
+            <input name="description" value={values.description} onChange={handleChange} required={true}/>
             <label htmlFor="technologies">Используемые технологии</label>
             <Select style={styles.select} className="customSelect"
                     name="technologies"
                     options={technologiesOptions} classNamePrefix="customSelect"
                     isMulti={true} placeholder={'Выберите используемые технологии'}
-                    onChange={handleChange} value={technologies} required={true}/>
+                    onChange={handleChangeSelect} value={technologies} required={true}/>
             <label htmlFor="demoLink">Ссылка на демо</label>
-            <input type="text" name="demoLink" value={demoLink} onChange={inputChangeHandler}/>
+            <input type="text" name="demoLink" value={values.demoLink} onChange={handleChange}/>
             <label htmlFor="gitLink">Ссылка на Github</label>
-            <input type="text" name="gitLink" value={gitLink} onChange={inputChangeHandler} required={true}/>
+            <input type="text" name="gitLink" value={values.gitLink} onChange={handleChange} required={true}/>
             <button type='submit'>Отправить форму</button>
          </form>
       </div>

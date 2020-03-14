@@ -95,12 +95,20 @@ export const projectAPI = {
          demoLink: demoLink,
          gitLink: gitLink
       });
+   }
+}
+
+export const patternsAPI = {
+   getPatterns() {
+      return instance.get(`/api/pattern`).then(response => response.data);
    },
-  /*
-   updateTodo(todoId, title) {
-      return instance.put(`/api/todo/${todoId}`, {title: title});
+   createPattern(title, description) {
+      return instance.post(`/api/pattern/generate`, {title: title, description: description});
    },
-   completeTodo(todoId, completed) {
-      return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
-   }*/
+   deletePattern(todoId) {
+      return instance.delete(`/api/pattern/${todoId}`);
+   },
+   updatePattern(todoId, title, description) {
+      return instance.put(`/api/pattern/${todoId}`, {title: title, description: description});
+   }
 }

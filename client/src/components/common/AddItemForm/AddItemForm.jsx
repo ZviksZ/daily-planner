@@ -2,26 +2,47 @@ import React, {useState} from 'react';
 import styles            from './AddItemForm.module.scss'
 
 
-const AddItemForm = ({onSend, placeholder}) => {
-   const [title, setTitle] = useState('');
+const AddItemForm = ({onSend, placeholder, secondField = false, secondFieldPlaceholder = ''}) => {
+   const [values, setValues] = useState({title: '', additionalField: ''});
 
-   const handleChange = e => setTitle(e.target.value)
+   const handleChange = event => {
+      const {name, value} = event.target;
+      setValues({...values, [name]: value})
+   }
 
    const pressHandler = async e => {
       if (e.key === 'Enter') {
-         onSend(title)
-         setTitle('')
+         if (secondField) {
+            onSend(values.title, values.additionalField)
+         } else {
+            onSend(values.title)
+         }
+         setValues({title: '', additionalField: ''})
       }
    }
 
    return (
       <>
-         <input className={styles.input} 
-                type="text" 
-                value={title} 
+         <input className={styles.input}
+                type="text"
+                value={values.title}
+                name={'title'}
                 placeholder={placeholder}
-                onChange={handleChange} 
+                onChange={handleChange}
                 onKeyPress={pressHandler}/>
+
+         {
+            secondField && <>
+               <input className={styles.input}
+                      type="text"
+                      name={'additionalField'}
+                      value={values.additionalField}
+                      placeholder={secondFieldPlaceholder}
+                      onChange={handleChange}
+                      onKeyPress={pressHandler}/>
+            </>
+         }
+
       </>
    )
 }
