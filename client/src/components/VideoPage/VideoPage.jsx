@@ -30,7 +30,7 @@ const VideoPage = ({setSearch, setFilter, filterList, currentFilter,
       <div className="page-section">
          {modalLink && <VideoModal link={modalLink} closeModal={closeModal}/>}
          <h3>Видео для просмотра</h3>
-         <AddItemForm onSend={addVideo} placeholder={'Ссылка на видео'}/>
+         <AddItemForm onSend={addVideo} placeholder={'Ссылка на видео c Youtube'}/>
          <SearchAndFilter onSearch={setSearch}
                           filterItems={filterList}
                           defaultFilter={currentFilter}

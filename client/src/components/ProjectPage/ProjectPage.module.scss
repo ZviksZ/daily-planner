@@ -25,11 +25,13 @@
             .techList {
                 display: flex;
                 list-style: none;
-                margin: 10px 0;
+                margin: 10px 0 0;
+                flex-wrap: wrap;
                 li {
                     font-size: 12px;
                     font-weight: 700;
                     margin-right: 5px;
+                    margin-bottom: 10px;
                 }
             }
             a {

@@ -12,13 +12,14 @@ const ProjectPage = ({projects, technologiesOptions, getProjects, createProject,
       getProjects()
    }, [getProjects])
 
+
    return (
       <div className={styles.projectPage}>
          {
-            addMode ? <button onClick={() => setAddMode(false)}>Закрыть форму</button> : <button onClick={() => setAddMode(true)}>Добавить проект</button>
+            addMode ? <button onClick={() => setAddMode(false)} className='btn-default mb-1'>Закрыть форму</button> : <button onClick={() => setAddMode(true)} className='btn-default mb-1'>Добавить проект</button>
          }
          {
-            addMode && <ProjectForm createProject={createProject} technologiesOptions={technologiesOptions}/>
+            addMode && <ProjectForm onSubmitHandler={createProject} technologiesOptions={technologiesOptions}/>
          }
          <div className={styles.projectList}>
             {

@@ -4,8 +4,7 @@ import PatternsItem from "../PatternsItem/PatternsItem.jsx";
 
 const PatternsList = ({title, list, updatePattern, deletePattern}) => {
    return (
-      <
->
+      <>
          {list.length
             ? list.map(pattern => <PatternsItem key={pattern._id}
                                             pattern={pattern}
