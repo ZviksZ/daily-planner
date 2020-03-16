@@ -1,6 +1,7 @@
 .todosList {
     margin-top: 30px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     h4 {
         margin-bottom: 10px;
@@ -10,6 +11,14 @@
     }
     .todoCompleted {
         width: 35%;
+    }
+    @media screen and (max-width: 1000px) {
+        .todoInWork{
+            width: 100%;
+        }
+        .todoCompleted {
+            width: 100%;
+        }
     }
     .todoItem {
         margin-bottom: 20px;

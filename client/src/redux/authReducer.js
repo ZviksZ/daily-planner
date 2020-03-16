@@ -12,7 +12,8 @@ let initialState = {
    message: '',
    error: '',
    userId: null,
-   ready: false
+   ready: false,
+   email: ''
 };
 
 const authReducer = (state = initialState, action) => {
@@ -48,7 +49,7 @@ const authReducer = (state = initialState, action) => {
    }
 }
 
-export const setUserData = (token, userId) => ({type: SET_USER_DATA, payload: {token, userId}})
+export const setUserData = (token, userId, email) => ({type: SET_USER_DATA, payload: {token, userId, email}})
 export const setMessage = message => ({type: SET_MESSAGE, message})
 export const setError = error => ({type: SET_ERROR, error})
 export const setReady = ready => ({type: SET_READY, ready})
@@ -61,11 +62,12 @@ export const login = (email, password) => async (dispatch) => {
       localStorage.setItem('userData', JSON.stringify({
          userId: response.userId, token: response.token
       }))
-      dispatch(setUserData(response.token, response.userId))
+      email = email.substr(0, email.indexOf('@'))
+      dispatch(setUserData(response.token, response.userId, email))
    } catch (error) {
       dispatch(setError(error.response.data.message))
       setTimeout(() => {
-         dispatch(setError(''))         
+         dispatch(setError(''))
       }, 3000)
    }
 }
@@ -84,7 +86,7 @@ export const register = (email, password) => async (dispatch) => {
          dispatch(setError(''))
          dispatch(setLoading(false))
       }, 3000)
-   }   
+   }
 }
 
 export const logout = () => async (dispatch) => {
@@ -95,16 +97,16 @@ export const logout = () => async (dispatch) => {
 export const localStorageUser = () => async (dispatch) => {
    try {
       const data = JSON.parse(localStorage.getItem('userData'))
-      
+
       if (data && data.token) {
          dispatch(setUserData(data.token, data.userId))
-      } 
-      
+      }
+
       dispatch(setReady(true))
    } catch (e) {
-      
+
    }
-   
+
 }
 
 
