@@ -20,6 +20,7 @@ const Sidebar = ({logout, userId, email}) => {
       setBurgerMode(!burgerMode);
    }
 
+
    return (
       <div className={styles.wrapper}>
          <h1>Daily planner</h1>
@@ -41,9 +42,6 @@ const Sidebar = ({logout, userId, email}) => {
                   <NavLink to='/english'
                            className={styles.links}
                            activeClassName={styles.activeLink}>Изучение английского</NavLink>
-                  <NavLink to={`/chat?name=${email}&room=daily_planner_room`}
-                           className={styles.links}
-                           activeClassName={styles.activeLink}>Чат</NavLink>
                </nav>
 
                <a href="/" className={styles.exitBtn} onClick={logoutHandler}>

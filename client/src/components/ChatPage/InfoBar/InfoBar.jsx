@@ -5,16 +5,15 @@ import onlineIcon from '../../../assets/img/onlineIcon.png'
 
 import './InfoBar.scss'
 
-const InfoBar = ({room}) => (
+const InfoBar = ({room, users, closeChat}) => (
    <div className="infoBar">
       <div className="leftInnerContainer">
          <img className="onlineIcon" src={onlineIcon} alt="online"/>
+         <span>{users && users.length}</span>
          <h3>{room}</h3>
       </div>
-     {/* <div className="rightInnerContainer">
+      <div className="rightInnerContainer" onClick={closeChat}><img src={closeIcon} alt="close"/></div>
 
-         <NavLink to='/todo'><img src={closeIcon} alt="close"/></NavLink>
-      </div>*/}
 
    </div>
 )

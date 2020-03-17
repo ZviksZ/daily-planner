@@ -18,6 +18,7 @@ export const useRoutes = isAuthenticated => {
          <div className="main__wrapper-outer">
             <Sidebar/>
             <GlobalError />
+            <ChatPage/>
             <div className="main__wrapper-in">
                <Switch>
                   <Route path="/todo">
@@ -35,7 +36,9 @@ export const useRoutes = isAuthenticated => {
                   <Route path="/english">
                      <EnglishPage/>
                   </Route>
-                  <Route exact path="/chat" component={Chat} />
+                  <Route path="/chat">
+
+                  </Route>
                   <Route path="/"
                          render={() => <Redirect from='/' to='/todo'/>}/>
                </Switch>

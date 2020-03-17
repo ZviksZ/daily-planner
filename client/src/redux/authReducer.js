@@ -59,10 +59,11 @@ export const logoutUser = () => ({type: LOGOUT})
 export const login = (email, password) => async (dispatch) => {
    try {
       let response = await authAPI.login(email, password)
-      localStorage.setItem('userData', JSON.stringify({
-         userId: response.userId, token: response.token
-      }))
       email = email.substr(0, email.indexOf('@'))
+      localStorage.setItem('userData', JSON.stringify({
+         userId: response.userId, token: response.token, login: email
+      }))
+
       dispatch(setUserData(response.token, response.userId, email))
    } catch (error) {
       dispatch(setError(error.response.data.message))
@@ -99,7 +100,7 @@ export const localStorageUser = () => async (dispatch) => {
       const data = JSON.parse(localStorage.getItem('userData'))
 
       if (data && data.token) {
-         dispatch(setUserData(data.token, data.userId))
+         dispatch(setUserData(data.token, data.userId, data.login))
       }
 
       dispatch(setReady(true))

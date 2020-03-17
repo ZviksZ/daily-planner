@@ -10,22 +10,20 @@ import './Chat.scss'
 
 let socket;
 
-const Chat = ({location}) => {
-   const [name, setName] = useState('')
-   const [room, setRoom] = useState('')
+const Chat = ({login}) => {
+   const [name, setName] = useState(login || 'defaultUser')
+   const [room, setRoom] = useState('daily planner chat')
    const [users, setUsers] = useState([]);
    const [message, setMessage] = useState('')
    const [messages, setMessages] = useState([])
+   const [chatMode, setChatMode] = useState(false)
 
    const ENDPOINT = 'localhost:5000'
 
    useEffect(() => {
-      const { name, room } = queryString.parse(location.search);
+      //const { name, room } = queryString.parse(location.search);
 
       socket = io(ENDPOINT);
-
-      setRoom(room);
-      setName(name);
 
       socket.emit('join', { name, room }, (error) => {
          if(error) {
@@ -33,7 +31,7 @@ const Chat = ({location}) => {
          }
       });
 
-   }, [ENDPOINT, location.search]);
+   }, [ENDPOINT, login]);
 
    useEffect(() => {
       socket.on('message', (message) => {
@@ -49,6 +47,7 @@ const Chat = ({location}) => {
 
          socket.off();
       }
+
    }, [messages])
 
    const sendMessage = (e) => {
@@ -61,13 +60,16 @@ const Chat = ({location}) => {
 
    return (
       <div className="outerContainer">
-         <div className="container">
-            <InfoBar room={room}/>
-            <Messages messages={messages} name={name}/>
-            <Input setMessage={setMessage} sendMessage={sendMessage} message={message}/>
-         </div>
+         {
+            chatMode ? <div className="container">
+               <InfoBar room={room} users={users} closeChat={() => setChatMode(false)}/>
+               <Messages messages={messages} name={name}/>
+               <Input setMessage={setMessage} sendMessage={sendMessage} message={message}/>
+            </div>
+               : <button onClick={() => setChatMode(true)}>Чат</button>
+         }
 
-         <TextContainer users={users}/>
+         {/*<TextContainer users={users}/>*/}
       </div>
    )
 }
