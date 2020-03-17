@@ -32,6 +32,7 @@ const Chat = ({location}) => {
             alert(error);
          }
       });
+
    }, [ENDPOINT, location.search]);
 
    useEffect(() => {
@@ -57,7 +58,6 @@ const Chat = ({location}) => {
          socket.emit('sendMessage', message, () => setMessage(''))
       }
    }
-   console.log(users)
 
    return (
       <div className="outerContainer">

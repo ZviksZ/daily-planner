@@ -1,6 +1,7 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
+import Chat                      from "./components/ChatPage/Chat/Chat.jsx";
 import ChatPage                  from "./components/ChatPage/ChatPage.jsx";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
@@ -34,9 +35,7 @@ export const useRoutes = isAuthenticated => {
                   <Route path="/english">
                      <EnglishPage/>
                   </Route>
-                  <Route path="/chat">
-                     <ChatPage/>
-                  </Route>
+                  <Route exact path="/chat" component={Chat} />
                   <Route path="/"
                          render={() => <Redirect from='/' to='/todo'/>}/>
                </Switch>

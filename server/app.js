@@ -8,8 +8,6 @@ const PORT = process.env.PORT || 5000;
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
-//const router = require('./chat.routes.js');
-
 const app = express()
 const server = http.createServer(app);
 const io = socketio(server);
@@ -24,16 +22,11 @@ app.use('/api/video', require('./routes/video.routes.js'))
 app.use('/api/english', require('./routes/english.routes.js'))
 app.use('/api/project', require('./routes/project.routes.js'))
 app.use('/api/pattern', require('./routes/pattern.routes.js'))
-//app.use('/api/chat', require('./routes/chat.routes.js'));
-
-app.get('/api/chat', function (req, res) {
-   console.log('hello23')
-})
-
 
 
 io.on('connect', (socket) => {
    socket.on('join', ({ name, room }, callback) => {
+      console.log('join')
       const { error, user } = addUser({ id: socket.id, name, room });
 
       if(error) return callback(error);
@@ -49,6 +42,7 @@ io.on('connect', (socket) => {
    });
 
    socket.on('sendMessage', (message, callback) => {
+      console.log('sendMessage')
       const user = getUser(socket.id);
 
       io.to(user.room).emit('message', { user: user.name, text: message });
@@ -57,6 +51,7 @@ io.on('connect', (socket) => {
    });
 
    socket.on('disconnect', () => {
+      console.log('disconnect')
       const user = removeUser(socket.id);
 
       if(user) {

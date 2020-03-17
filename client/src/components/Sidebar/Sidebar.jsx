@@ -6,6 +6,7 @@ import {NavLink, useHistory} from 'react-router-dom'
 import logoutIcon            from '../../assets/img/logout-icon.png'
 
 const Sidebar = ({logout, userId, email}) => {
+
    const history = useHistory();
    const [burgerMode, setBurgerMode] = useState(false);
 
