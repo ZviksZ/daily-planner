@@ -8,8 +8,7 @@ import './InfoBar.scss'
 const InfoBar = ({room, users, closeChat}) => (
    <div className="infoBar">
       <div className="leftInnerContainer">
-         <img className="onlineIcon" src={onlineIcon} alt="online"/>
-         <span>{users && users.length}</span>
+         <span><img className="onlineIcon" src={onlineIcon} alt="online"/>{users && users.length}</span>
          <h3>{room}</h3>
       </div>
       <div className="rightInnerContainer" onClick={closeChat}><img src={closeIcon} alt="close"/></div>

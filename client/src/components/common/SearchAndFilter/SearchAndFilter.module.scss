@@ -3,6 +3,7 @@
     text-align: center;
     margin: 25px 0;
     padding-bottom: 30px;
+    z-index: 7;
     .searchInput {
         border: 1px solid rgba(255, 130, 0, 0.29);
         border-radius: 3px;
@@ -34,9 +35,13 @@
             color: #ff8600;
         }
         @media screen and (min-width: 1000px){
+
             &:hover {
                 color: #ff8600;
             }
+        }
+        @media screen and (max-width: 1000px){
+            right: 0;
         }
     }
     .filtersList {

@@ -1,11 +1,11 @@
+import cn                           from "classnames";
 import React, {useState, useEffect} from 'react'
-import queryString                  from 'query-string'
 import io                           from 'socket.io-client'
+import styles                       from "../../PatternsPage/PatternsPage.module.scss";
 import InfoBar                      from "../InfoBar/InfoBar";
 import Input                        from "../Input/Input";
 import Messages                     from "../Messages/Messages";
-import TextContainer                from "../TextContainer/TextContainer";
-
+import { MdChat }                   from "react-icons/md";
 import './Chat.scss'
 
 let socket;
@@ -21,7 +21,6 @@ const Chat = ({login}) => {
    const ENDPOINT = 'localhost:5000'
 
    useEffect(() => {
-      //const { name, room } = queryString.parse(location.search);
 
       socket = io(ENDPOINT);
 
@@ -66,10 +65,14 @@ const Chat = ({login}) => {
                <Messages messages={messages} name={name}/>
                <Input setMessage={setMessage} sendMessage={sendMessage} message={message}/>
             </div>
-               : <button onClick={() => setChatMode(true)}>Чат</button>
-         }
+               : <div className="chatBtn">
+                  <MdChat onClick={() => setChatMode(true)}
+                          className="editBtn"
+                          size={'2.8rem'}/>
+               </div>
 
-         {/*<TextContainer users={users}/>*/}
+
+         }
       </div>
    )
 }
