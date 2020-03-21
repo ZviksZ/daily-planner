@@ -18,7 +18,7 @@ const Chat = ({login}) => {
    const [messages, setMessages] = useState([])
    const [chatMode, setChatMode] = useState(false)
 
-   const ENDPOINT = 'localhost:5000'
+   const ENDPOINT = 'http://localhost:5000/'
 
    useEffect(() => {
 

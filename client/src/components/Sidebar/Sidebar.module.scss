@@ -71,6 +71,11 @@
             border-left: 2px solid #ff8600;
         }
     }
+    .sidebarNav {
+        .burgerBtn {
+            display: none;
+        }
+    }
     @media screen and (max-width: 1000px){
         flex-direction: row;
         justify-content: space-between;
@@ -98,6 +103,9 @@
                 left: 0;
                 background: #ffffff;
                 padding: 15px 0;
+                .burgerBtn {
+                    display: block;
+                }
                 nav {
                     margin-top: 150px;
                     .links {
