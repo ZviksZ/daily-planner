@@ -1,7 +1,12 @@
 import * as axios                from "axios";
 
 const instance = axios.create({
-   withCredentials: true
+   baseURL: 'https://daily-23.herokuapp.com',
+   headers: {
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Credentials':true,
+      'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+   }
 })
 
 instance.interceptors.request.use(config => {

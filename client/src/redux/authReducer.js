@@ -63,7 +63,6 @@ export const login = (email, password) => async (dispatch) => {
       localStorage.setItem('userData', JSON.stringify({
          userId: response.userId, token: response.token, login: email
       }))
-
       dispatch(setUserData(response.token, response.userId, email))
    } catch (error) {
       dispatch(setError(error.response.data.message))

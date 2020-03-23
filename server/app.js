@@ -4,7 +4,7 @@ const socketio = require('socket.io');
 const cors = require('cors');
 const http = require('http');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || '5000';
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 
@@ -64,18 +64,21 @@ io.on('connect', (socket) => {
 
 async function start() {
    try {
-      await mongoose.connect('mongodb+srv://viks2332:viks2332@cluster0-pkgbb.azure.mongodb.net/daily-planner', {
+      const uri = "mongodb+srv://viks2332:viks2332@cluster0-pkgbb.azure.mongodb.net/daily-planner"
+      await mongoose.connect(uri, {
          useNewUrlParser: true,
          useUnifiedTopology: true,
          useCreateIndex: true
       }).then(() => console.log('database connected'))
+
       server.listen(PORT, () => {
          console.log(`App has been started on port ${PORT}...`)
       })
+
    } catch (e) {
       console.log('Server Error', e.message)
       process.exit(1)
    }
 }
 
-start()
+start();

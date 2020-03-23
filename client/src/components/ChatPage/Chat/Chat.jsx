@@ -18,7 +18,8 @@ const Chat = ({login}) => {
    const [messages, setMessages] = useState([])
    const [chatMode, setChatMode] = useState(false)
 
-   const ENDPOINT = 'http://localhost:5000/'
+   //const ENDPOINT = 'http://localhost:5000/'
+   const ENDPOINT = 'https://daily-23.herokuapp.com/'
 
    useEffect(() => {
 
@@ -58,7 +59,7 @@ const Chat = ({login}) => {
    }
 
    return (
-      <div className="outerContainer">
+      <div className={cn({["outerContainerOpen"]: chatMode}, "outerContainer")}>
          {
             chatMode ? <div className="container">
                <InfoBar room={room} users={users} closeChat={() => setChatMode(false)}/>
