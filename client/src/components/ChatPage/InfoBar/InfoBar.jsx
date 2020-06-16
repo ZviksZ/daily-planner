@@ -1,5 +1,4 @@
 import React      from 'react'
-import {NavLink}  from "react-router-dom";
 import closeIcon  from '../../../assets/img/closeIcon.png'
 import onlineIcon from '../../../assets/img/onlineIcon.png'
 

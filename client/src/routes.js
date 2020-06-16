@@ -1,10 +1,10 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
-import Chat                      from "./components/ChatPage/Chat/Chat.jsx";
 import ChatPage                  from "./components/ChatPage/ChatPage.jsx";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
+import {Navbar}                  from "./components/Navbar/Navbar.jsx";
 import PatternsPage              from "./components/PatternsPage/PatternsPage.jsx";
 import ProjectPage               from "./components/ProjectPage/ProjectPage.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";
@@ -16,6 +16,7 @@ export const useRoutes = isAuthenticated => {
    if (isAuthenticated) {
       return (
          <div className="main__wrapper-outer">
+            <Navbar/>
             <Sidebar/>
             <GlobalError />
             <ChatPage/>

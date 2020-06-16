@@ -1,7 +1,6 @@
 import cn                           from "classnames";
 import React, {useState, useEffect} from 'react'
 import io                           from 'socket.io-client'
-import styles                       from "../../PatternsPage/PatternsPage.module.scss";
 import InfoBar                      from "../InfoBar/InfoBar";
 import Input                        from "../Input/Input";
 import Messages                     from "../Messages/Messages";
@@ -11,7 +10,9 @@ import './Chat.scss'
 let socket;
 
 const Chat = ({login}) => {
+   // eslint-disable-next-line
    const [name, setName] = useState(login || 'defaultUser')
+   // eslint-disable-next-line
    const [room, setRoom] = useState('daily planner chat')
    const [users, setUsers] = useState([]);
    const [message, setMessage] = useState('')
@@ -31,7 +32,7 @@ const Chat = ({login}) => {
          }
       });
 
-   }, [ENDPOINT, login]);
+   }, [ENDPOINT, login, name, room]);
 
    useEffect(() => {
       socket.on('message', (message) => {
@@ -59,6 +60,7 @@ const Chat = ({login}) => {
    }
 
    return (
+      // eslint-disable-next-line
       <div className={cn({["outerContainerOpen"]: chatMode}, "outerContainer")}>
          {
             chatMode ? <div className="container">

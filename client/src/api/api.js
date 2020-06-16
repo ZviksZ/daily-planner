@@ -28,6 +28,7 @@ export const authAPI = {
       return instance.post('/api/auth/register', {email, password}).then(response => response.data);
    }
 }
+
 export const todosAPI = {
    getTodos() {
       return instance.get(`/api/todo`).then(response => response.data);
@@ -45,6 +46,7 @@ export const todosAPI = {
       return instance.put(`/api/todo/${todoId}/completed`, {completed: completed});
    }
 }
+
 export const videoAPI = {
    getVideos() {
       return instance.get(`/api/video`).then(response => response.data);
