@@ -12,12 +12,21 @@ const AddItemForm = ({onSend, placeholder, secondField = false, secondFieldPlace
 
    const pressHandler = async e => {
       if (e.key === 'Enter') {
-         if (secondField) {
-            onSend(values.title, values.additionalField)
-         } else {
-            onSend(values.title)
+         if (!secondField) {
+            onSend(values.title);
+
+            setValues({title: '', additionalField: ''});
          }
-         setValues({title: '', additionalField: ''})
+      }
+   }
+
+   const twoFieldSend = async e => {
+      e.preventDefault();
+
+      if (secondField) {
+         onSend(values.title, values.additionalField);
+
+         setValues({title: '', additionalField: ''});
       }
    }
 
@@ -40,6 +49,8 @@ const AddItemForm = ({onSend, placeholder, secondField = false, secondFieldPlace
                       placeholder={secondFieldPlaceholder}
                       onChange={handleChange}
                       onKeyPress={pressHandler}/>
+
+               <button onClick={twoFieldSend} className='btn-default'>Отправить</button>
             </>
          }
 
