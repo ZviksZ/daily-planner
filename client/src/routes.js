@@ -4,7 +4,7 @@ import AuthPage                  from "./components/AuthPage/AuthPage";
 import ChatPage                  from "./components/ChatPage/ChatPage.jsx";
 import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
 import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
-import {Navbar}                  from "./components/Navbar/Navbar.jsx";
+import {Navbar}                  from "./components/Navbar/Navbar.tsx";
 import PatternsPage              from "./components/PatternsPage/PatternsPage.jsx";
 import ProjectPage               from "./components/ProjectPage/ProjectPage.jsx";
 import Sidebar                   from "./components/Sidebar/Sidebar";

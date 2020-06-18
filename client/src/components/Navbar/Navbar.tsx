@@ -6,7 +6,7 @@ import {MdMenu}                   from "react-icons/md";
 import {MdClose}                  from "react-icons/md";
 
 
-export const Navbar = (props) => {
+export const Navbar: React.FC = () => {
    const {} = useSelector(state => ({
    }))
    const dispatch = useDispatch()
