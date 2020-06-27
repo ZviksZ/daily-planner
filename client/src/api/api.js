@@ -1,7 +1,8 @@
 import * as axios                from "axios";
 
 const instance = axios.create({
-   baseURL: 'https://daily-23.herokuapp.com',
+   /*baseURL: 'https://daily-23.herokuapp.com',*/
+   baseURL: 'http://localhost:5000/',
    headers: {
       'Access-Control-Allow-Origin' : '*',
       'Access-Control-Allow-Credentials':true,
@@ -26,6 +27,9 @@ export const authAPI = {
    },
    register(email, password) {
       return instance.post('/api/auth/register', {email, password}).then(response => response.data);
+   },
+   verifyAuth(token) {
+      return instance.post('/api/auth/isauth', {token}).then(response => response.data);
    }
 }
 

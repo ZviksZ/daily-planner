@@ -1,5 +1,5 @@
-import {patternsAPI}       from "../api/api.js";
-import {getGlobalError} from "./appReducer.js";
+import {patternsAPI}    from "../api/api.js";
+import {getGlobalError} from "./appReducer.ts";
 
 const SET_PATTERNS = 'my-social-network/patterns/SET_PATTERNS';
 const ADD_PATTERN = 'my-social-network/patterns/ADD_PATTERN';

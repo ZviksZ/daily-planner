@@ -1,13 +1,23 @@
-import {authAPI}    from "../api/api.js";
-import {setLoading} from "./appReducer.js";
+import {authAPI}    from "../api/api";
+import {setLoading} from "./appReducer";
+import {
+   AuthActionTypes,
+   IAuthInitialState,
+   LOGOUT, LogoutAction,
+   SET_ERROR,
+   SET_MESSAGE,
+   SET_READY,
+   SET_USER_DATA, SetErrorAction,
+   SetMessageAction,
+   SetReadyAction,
+   SetUserDataAction
+}                   from "../types/auth_types";
+import {Dispatch}   from "redux";
+import {AppActions} from "../types/common_types";
+import {AppState}   from "./store";
 
-const SET_USER_DATA = 'my-social-network/auth/SET_USER_DATA';
-const SET_MESSAGE = 'my-social-network/auth/SET_MESSAGE';
-const SET_ERROR = 'my-social-network/auth/SET_ERROR';
-const SET_READY = 'my-social-network/auth/SET_READY';
-const LOGOUT = 'my-social-network/auth/LOGOUT';
 
-let initialState = {
+let initialState: IAuthInitialState = {
    token: '',
    message: '',
    error: '',
@@ -16,7 +26,7 @@ let initialState = {
    email: ''
 };
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: AuthActionTypes) => {
    switch (action.type) {
       case SET_USER_DATA:
          return {
@@ -49,14 +59,14 @@ const authReducer = (state = initialState, action) => {
    }
 }
 
-export const setUserData = (token, userId, email) => ({type: SET_USER_DATA, payload: {token, userId, email}})
-export const setMessage = message => ({type: SET_MESSAGE, message})
-export const setError = error => ({type: SET_ERROR, error})
-export const setReady = ready => ({type: SET_READY, ready})
-export const logoutUser = () => ({type: LOGOUT})
+export const setUserData = (token: string, userId: string | null, email: string): SetUserDataAction => ({type: SET_USER_DATA, payload: {token, userId, email}})
+export const setMessage = (message: string): SetMessageAction => ({type: SET_MESSAGE, message})
+export const setError = (error: string): SetErrorAction => ({type: SET_ERROR, error})
+export const setReady = (ready: boolean): SetReadyAction => ({type: SET_READY, ready})
+export const logoutUser = (): LogoutAction => ({type: LOGOUT})
 
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email: string, password: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await authAPI.login(email, password)
       email = email.substr(0, email.indexOf('@'))
@@ -71,7 +81,7 @@ export const login = (email, password) => async (dispatch) => {
       }, 3000)
    }
 }
-export const register = (email, password) => async (dispatch) => {
+export const register = (email: string, password: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    dispatch(setLoading(true))
    try {
       let response = await authAPI.register(email, password)
@@ -89,26 +99,29 @@ export const register = (email, password) => async (dispatch) => {
    }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    dispatch(logoutUser())
    localStorage.removeItem('userData')
 }
 
-export const localStorageUser = () => async (dispatch) => {
+export const localStorageUser = () => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
-      const data = JSON.parse(localStorage.getItem('userData'))
+      const data = JSON.parse(localStorage.getItem('userData') || '{}')
 
       if (data && data.token) {
          dispatch(setUserData(data.token, data.userId, data.login))
+
+
+         await authAPI.verifyAuth(data.token)
       }
 
       dispatch(setReady(true))
    } catch (e) {
-
+      dispatch(logoutUser())
+      localStorage.removeItem('userData')
    }
 
 }
-
 
 
 export default authReducer;

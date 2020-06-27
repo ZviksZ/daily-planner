@@ -5,7 +5,6 @@ import {getFilteredPatterns}                                                 fro
 import AddItemForm                                                           from "../common/AddItemForm/AddItemForm.jsx";
 import Loader                                                                from "../common/Loader/Loader.jsx";
 import SearchAndFilter                                                       from "../common/SearchAndFilter/SearchAndFilter.jsx";
-import ProjectForm                                                           from "../ProjectPage/ProjectPage.jsx";
 import PatternsList                                                          from "./PatternsList/PatternsList.jsx";
 import styles                                                                from './PatternsPage.module.scss'
 

@@ -1,10 +1,10 @@
-import React, {useEffect}        from 'react';
-import {connect}       from "react-redux";
-import Loader                    from "./components/common/Loader/Loader.jsx";
-import {localStorageUser}        from "./redux/authReducer.js";
-import {useRoutes}               from "./routes"
+import React, {useEffect} from 'react';
+import {connect}          from "react-redux";
+import Loader             from "./components/common/Loader/Loader.jsx";
+import {localStorageUser} from "./redux/authReducer";
+import {useRoutes}        from "./routes"
 
-const App = ({token, localStorageUser,ready}) => {
+const App = ({token, localStorageUser, ready}: any) => {
    const isAuthenticated = !!token
    const routes = useRoutes(isAuthenticated)
 
@@ -23,7 +23,7 @@ const App = ({token, localStorageUser,ready}) => {
    )
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: any) => {
    return {
       token: state.authPage.token,
       userId: state.authPage.userId,

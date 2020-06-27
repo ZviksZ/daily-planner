@@ -1,5 +1,5 @@
 import {todosAPI}       from "../api/api.js";
-import {getGlobalError} from "./appReducer.js";
+import {getGlobalError} from "./appReducer.ts";
 
 const SET_TODOS = 'my-social-network/todos/SET_TODOS';
 const ADD_TODO = 'my-social-network/todos/ADD_TODO';

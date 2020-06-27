@@ -1,5 +1,5 @@
 import {englishAPI}     from "../api/api.js";
-import {getGlobalError} from "./appReducer.js";
+import {getGlobalError} from "./appReducer.ts";
 
 const SET_DICTIONARY = 'my-social-network/english/SET_DICTIONARY';
 const ADD_NEW_WORD = 'my-social-network/english/ADD_NEW_WORD';

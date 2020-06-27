@@ -69,12 +69,29 @@ router.post('/login',
          const token = jwt.sign(
             { userId: user.id },
             "daily planner 23",
-            {expiresIn: '2h'}
+            {expiresIn: '1m'}
          )
 
          res.json({token, userId: user.id})
       } catch (e) {
          res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
+      }
+   })
+
+
+router.post('/isauth',
+   async (req, res) => {
+      try {
+         const {token} = req.body
+
+         const isAuth = jwt.verify(
+            token,
+            "daily planner 23"
+         )
+
+         res.json({isAuth})
+      } catch (e) {
+         res.status(401).json({message: 'Нет авторизации'})
       }
    })
 

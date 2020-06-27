@@ -1,6 +1,6 @@
- import {videoAPI}       from "../api/api.js";
+ import {videoAPI}      from "../api/api.js";
 import {getYoutubeId}   from "../utils";
-import {getGlobalError} from "./appReducer.js";
+import {getGlobalError} from "./appReducer.ts";
 
 const SET_VIDEOS = 'my-social-network/videos/SET_VIDEOS';
 const ADD_VIDEO = 'my-social-network/videos/ADD_VIDEO';

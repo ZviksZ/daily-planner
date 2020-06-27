@@ -1,19 +1,26 @@
 import cn                     from "classnames";
-import React, {useState}      from 'react'
+import React                  from 'react'
 import {connect, useDispatch} from "react-redux";
-import {toggleMenu}           from "../../redux/appReducer.js";
-import {logout}               from "../../redux/authReducer.js";
+import {toggleMenu}           from "../../redux/appReducer";
+import {logout}               from "../../redux/authReducer";
 import styles                 from './Sidebar.module.scss'
 import {NavLink}              from 'react-router-dom'
 import logoutIcon             from '../../assets/img/logout-icon.png'
+import {MdClose}              from "react-icons/md";
+import {AppState}             from "../../redux/store";
+import {bindActionCreators}   from "redux";
+import {AppActions}           from "../../types/common_types";
+import {ThunkDispatch}        from "redux-thunk";
 
-import {MdMenu}  from "react-icons/md";
-import {MdClose} from "react-icons/md";
+interface SidebarProps {
 
-const Sidebar = ({logout,menuOpen}) => {
+}
+type Props = SidebarProps & LinkStateProps & LinkDispatchProps;
+
+const Sidebar: React.FC<Props> = ({logout, menuOpen}) => {
    const dispatch = useDispatch()
 
-   const logoutHandler = (e) => {
+   const logoutHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault()
       logout()
    }
@@ -65,12 +72,25 @@ const Sidebar = ({logout,menuOpen}) => {
    );
 };
 
-let mapStateToProps = (state) => {
+interface LinkStateProps {
+   menuOpen: boolean
+}
+
+interface LinkDispatchProps {
+   logout: () => void
+}
+
+let mapStateToProps = (state: AppState): LinkStateProps => {
    return {
       menuOpen: state.common.menuOpen
    }
 }
-
-export default connect(mapStateToProps, {logout})(Sidebar);
+let mapDispatchToProps = (
+   dispatch: ThunkDispatch<any, any, AppActions>,
+   ownProps: SidebarProps
+): LinkDispatchProps => ({
+   logout: bindActionCreators(logout, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
 
 
