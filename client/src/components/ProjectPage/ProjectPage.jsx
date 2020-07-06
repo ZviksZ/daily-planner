@@ -19,7 +19,7 @@ const ProjectPage = ({projects, technologiesOptions, getProjects, createProject,
             addMode ? <button onClick={() => setAddMode(false)} className='btn-default mb-1'>Закрыть форму</button> : <button onClick={() => setAddMode(true)} className='btn-default mb-1'>Добавить проект</button>
          }
          {
-            addMode && <ProjectForm onSubmitHandler={createProject} technologiesOptions={technologiesOptions}/>
+            addMode && <ProjectForm setEditMode={setAddMode} onSubmitHandler={createProject} technologiesOptions={technologiesOptions}/>
          }
          <div className={styles.projectList}>
             {

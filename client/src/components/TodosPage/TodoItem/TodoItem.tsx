@@ -2,11 +2,20 @@ import React, {useState} from 'react';
 import styles            from '../TodosPage.module.scss'
 
 import { FaWindowClose } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
-import { MdRefresh } from "react-icons/md";
-import { TiCancel } from "react-icons/ti";
+import { FaPen }         from "react-icons/fa";
+import { MdRefresh }     from "react-icons/md";
+import { TiCancel }      from "react-icons/ti";
+import {ITodo}           from "../../../types/todos_types";
 
-const TodoItem = ({todo, deleteTodoItem, updateTodo, completeTodo}) => {
+
+interface TodoItemProps {
+   todo: ITodo
+   deleteTodo: (todoId:string) => void
+   updateTodo: (todoId:string, title:string) => void
+   completeTodo: (todoId:string, completed:boolean) => void
+}
+
+const TodoItem: React.FC<TodoItemProps>  = ({todo, deleteTodo, updateTodo, completeTodo}) => {
    const [editMode, setEditMode] = useState(false);
    const [title, setTitle] = useState(todo.title)
 
@@ -39,7 +48,7 @@ const TodoItem = ({todo, deleteTodoItem, updateTodo, completeTodo}) => {
                   </div>
                   <div className="btns">
                      <FaPen title="Редактировать" onClick={() => setEditMode(true)} className="editBtn" size={'1.2rem'}/>
-                     <FaWindowClose title="Удалить" onClick={() => deleteTodoItem(todo._id)} className="closeBtn" size={'1.6rem'}/>
+                     <FaWindowClose title="Удалить" onClick={() => deleteTodo(todo._id)} className="closeBtn" size={'1.6rem'}/>
                   </div>
                </>
          }

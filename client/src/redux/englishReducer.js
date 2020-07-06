@@ -1,4 +1,4 @@
-import {englishAPI}     from "../api/api.js";
+import {englishAPI}     from "../api/api.ts";
 import {getGlobalError} from "./appReducer.ts";
 
 const SET_DICTIONARY = 'my-social-network/english/SET_DICTIONARY';

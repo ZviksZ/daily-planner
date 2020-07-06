@@ -108,17 +108,18 @@ export const localStorageUser = () => async (dispatch: Dispatch<AppActions>, get
    try {
       const data = JSON.parse(localStorage.getItem('userData') || '{}')
 
-      if (data && data.token) {
-         dispatch(setUserData(data.token, data.userId, data.login))
-
-
-         await authAPI.verifyAuth(data.token)
+      if (!data && !data.token) {
+         logout()
       }
+
+      dispatch(setUserData(data.token, data.userId, data.login))
+      await authAPI.verifyAuth(data.token)
 
       dispatch(setReady(true))
    } catch (e) {
       dispatch(logoutUser())
       localStorage.removeItem('userData')
+      dispatch(setReady(true))
    }
 
 }

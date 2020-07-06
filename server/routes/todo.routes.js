@@ -36,10 +36,10 @@ router.delete("/:id", auth, async (req, res)=>{
       const message = await Todo
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
-      res.json({ message });
+      res.json({ message: 'Todo удален' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
-   }   
+   }
 });
 
 router.put("/:id", auth, async (req, res)=>{
@@ -47,17 +47,17 @@ router.put("/:id", auth, async (req, res)=>{
       const message = await Todo
          .updateOne({owner: req.user.userId, _id: req.params.id}, { title: req.body.title})
 
-      res.json({ message });
+      res.json({ message: 'Todo изменен' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
-   }   
+   }
 });
 
 router.put("/:id/completed", auth, async (req, res)=>{
    try {
       const message = await Todo
          .updateOne({owner: req.user.userId, _id: req.params.id}, { completed: !!req.body.completed})
-      res.json({ message });
+      res.json({ message: 'Статус todo изменился' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }

@@ -1,4 +1,4 @@
- import {videoAPI}      from "../api/api.js";
+ import {videoAPI}      from "../api/api.ts";
 import {getYoutubeId}   from "../utils";
 import {getGlobalError} from "./appReducer.ts";
 

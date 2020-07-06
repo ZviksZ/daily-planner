@@ -1,4 +1,4 @@
-import {patternsAPI}    from "../api/api.js";
+import {patternsAPI}    from "../api/api.ts";
 import {getGlobalError} from "./appReducer.ts";
 
 const SET_PATTERNS = 'my-social-network/patterns/SET_PATTERNS';

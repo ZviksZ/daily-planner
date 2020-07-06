@@ -1,4 +1,4 @@
-import {projectAPI}     from "../api/api.js";
+import {projectAPI}     from "../api/api.ts";
 import {getGlobalError} from "./appReducer.ts";
 
 const SET_PROJECTS = 'my-social-network/projects/SET_PROJECTS';
