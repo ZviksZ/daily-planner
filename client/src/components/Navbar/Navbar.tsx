@@ -1,12 +1,11 @@
-import React                      from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {toggleMenu}               from "../../redux/appReducer";
-import styles                     from './Navbar.module.scss'
-import {MdMenu}                   from "react-icons/md";
-import {AppState}                 from "../../redux/store";
+import React         from 'react';
+import {useDispatch} from "react-redux";
+import {toggleMenu}  from "../../redux/appReducer";
+import styles        from './Navbar.module.scss'
+import {MdMenu}      from "react-icons/md";
 
 
-export const Navbar: React.FC= () => {
+export const Navbar: React.FC = () => {
    /*const {} = useSelector((state: AppState) => ({
    }))*/
    const dispatch = useDispatch()

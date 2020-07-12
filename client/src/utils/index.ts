@@ -1,4 +1,4 @@
-export const getYoutubeId = url => {
+export const getYoutubeId = (url: string) => {
    // eslint-disable-next-line
    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
    let match = url.match(regExp);

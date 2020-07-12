@@ -1,12 +1,26 @@
-import {projectAPI}     from "../api/api.ts";
-import {getGlobalError} from "./appReducer.ts";
+import {projectAPI}     from "../api/api";
+import {getGlobalError} from "./appReducer";
+import {
+   ADD_PROJECT,
+   DELETE_PROJECT,
+   IProject,
+   IProjectTechnologies,
+   SET_PROJECTS,
+   UPDATE_PROJECT,
+   ProjectsActionTypes,
+   ProjectInitialState,
+   UpdateProjectAction,
+   AddProjectAction,
+   SetProjectsAction,
+   DeleteProjectAction
+}                       from "../types/project_types";
+import {Dispatch}       from "redux";
+import {AppActions}     from "../types/common_types";
+import {AppState}       from "./store";
 
-const SET_PROJECTS = 'my-social-network/projects/SET_PROJECTS';
-const ADD_PROJECT = 'my-social-network/projects/ADD_PROJECT';
-const DELETE_PROJECT = 'my-social-network/projects/DELETE_PROJECT';
-const UPDATE_PROJECT = 'my-social-network/projects/UPDATE_PROJECT';
 
-let initialState = {
+
+let initialState: ProjectInitialState = {
    projects: [],
    technologiesOptions: [
       {value: 'react', label: 'React'},
@@ -54,7 +68,7 @@ let initialState = {
    ]
 };
 
-const projectReducer = (state = initialState, action) => {
+const projectReducer = (state = initialState, action: ProjectsActionTypes) => {
    switch (action.type) {
       case SET_PROJECTS: {
          return {
@@ -98,89 +112,47 @@ const projectReducer = (state = initialState, action) => {
 }
 
 
-export const setProjects = projects => ({type: SET_PROJECTS, projects})
-export const addProject = project => ({type: ADD_PROJECT, project})
-export const deleteProject = projectId => ({type: DELETE_PROJECT, projectId})
-export const updateProjectItem = (technologies, description, demoLink, gitLink, projectId) => ({type: UPDATE_PROJECT, technologies, description, demoLink, gitLink, projectId})
+export const setProjects = (projects: IProject[]): SetProjectsAction => ({type: SET_PROJECTS, projects})
+export const addProject = (project: IProject): AddProjectAction => ({type: ADD_PROJECT, project})
+export const deleteProject = (projectId: string): DeleteProjectAction => ({type: DELETE_PROJECT, projectId})
+export const updateProjectItem = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId: string): UpdateProjectAction => ({type: UPDATE_PROJECT, technologies, description, demoLink, gitLink, projectId})
 
 
-export const getProjects = () => async (dispatch) => {
+export const getProjects = () => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await projectAPI.getProjects()
       dispatch(setProjects(response))
    } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
+      getGlobalError(error.response.data.message)
    }
 }
-export const createProject = (technologies, description, demoLink, gitLink) => async dispatch => {
+export const createProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await projectAPI.createProject(technologies, description, demoLink, gitLink)
       dispatch(addProject(response.data.project))
    } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
+      getGlobalError(error.response.data.message)
    }
 }
-export const deleteProjectItem = (projectId) => async dispatch => {
+export const deleteProjectItem = (projectId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await projectAPI.deleteProject(projectId)
 
       dispatch(deleteProject(response.data.message._id))
    } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
+      getGlobalError(error.response.data.message)
    }
 }
 
-export const updateTodo = (technologies, description, demoLink, gitLink, projectId) => async dispatch => {
+export const updateProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       await projectAPI.updateProject(technologies, description, demoLink, gitLink, projectId)
       dispatch(updateProjectItem(technologies, description, demoLink, gitLink, projectId))
    } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
+      getGlobalError(error.response.data.message)
    }
 }
 
-/*
-export const deleteTodoItem = todoId => ({type: DELETE_TODO, todoId})
-export const updateTodoItem = (todoId, title) => ({type: UPDATE_TODO, todoId, title})
-export const completedTodoItem = (todoId, completed) => ({type: COMPLETED_TODO, todoId, completed})
-
-
-export const getTodos = () => async (dispatch) => {
-   try {
-      let response = await todosAPI.getTodos()
-      dispatch(setTodos(response))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
-export const createTodo = (title) => async dispatch => {
-   try {
-      let response = await todosAPI.createTodo(title)
-      dispatch(addTodo(response.data.todo))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
-
-export const updateTodo = (todoId, title) => async dispatch => {
-   try {
-      await todosAPI.updateTodo(todoId, title)
-      dispatch(updateTodoItem(todoId, title))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
-export const completeTodo = (todoId, completed) => async dispatch => {
-   try {
-      await todosAPI.completeTodo(todoId, completed)
-      dispatch(completedTodoItem(todoId, completed))
-   } catch (error) {
-      dispatch(getGlobalError(error.response.data.message))
-   }
-}
-
-
-*/
 
 
 export default projectReducer;

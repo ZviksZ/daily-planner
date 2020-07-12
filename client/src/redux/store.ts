@@ -3,7 +3,7 @@ import thunk, { ThunkMiddleware }                      from "redux-thunk";
 import appReducer                                      from "./appReducer";
 import englishReducer                                  from "./englishReducer.js";
 import patternReducer                                  from "./patternReducer.js";
-import projectReducer                                  from "./projectReducer.js";
+import projectReducer                                  from "./projectReducer";
 import todoReducer                                     from "./todoReducer";
 import authReducer                                     from "./authReducer";
 import videoReducer                                    from "./videoReducer.js";

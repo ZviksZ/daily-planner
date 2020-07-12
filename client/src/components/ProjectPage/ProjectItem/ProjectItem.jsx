@@ -6,7 +6,7 @@ import { FaWindowClose } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import { TiCancel } from "react-icons/ti";
 
-const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateTodo, editModeHandler}) => {
+const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateProject}) => {
    const [editMode, setEditMode] = useState(false)
 
    return (
@@ -14,7 +14,7 @@ const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateTod
          {
             editMode
                ? <>
-                  <ProjectForm setEditMode={setEditMode} onSubmitHandler={updateTodo} project={project} technologiesOptions={technologiesOptions}/>
+                  <ProjectForm setEditMode={setEditMode} onSubmitHandler={updateProject} project={project} technologiesOptions={technologiesOptions}/>
                   <div className={styles.btnBlock}>
                      <div className="btns">
                         <TiCancel title="Отменить редактирование" onClick={() => setEditMode(false)} className="closeBtn" size={'2rem'}/>
