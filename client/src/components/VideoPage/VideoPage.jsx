@@ -1,7 +1,7 @@
 import React, {useEffect, useState}                                                from 'react';
 import {connect}                                                                   from "react-redux";
 import {getFilteredVideos}                                                         from "../../redux/selectors/videoSelectors.js";
-import {addVideo, deleteVideo, getVideos, setFilter, setSearch, updateVideoStatus} from "../../redux/videoReducer.js";
+import {addVideo, deleteVideo, getVideos, setFilter, setSearch, updateVideoStatus} from "../../redux/videoReducer.ts";
 import AddItemForm                                                                 from "../common/AddItemForm/AddItemForm.jsx";
 import SearchAndFilter                                                             from "../common/SearchAndFilter/SearchAndFilter.jsx";
 import VideoItem                                                                   from "./VideoItem/VideoItem.jsx";
