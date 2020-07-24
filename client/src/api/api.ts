@@ -3,7 +3,7 @@ import {ITodo} from "../types/todos_types";
 
 const instance = axios.create({
    /*baseURL: 'https://daily-23.herokuapp.com',*/
-   baseURL: 'http://localhost:5000/',
+   baseURL: 'http://localhost:8888/',
    headers: {
       'Access-Control-Allow-Origin' : '*',
       'Access-Control-Allow-Credentials':true,

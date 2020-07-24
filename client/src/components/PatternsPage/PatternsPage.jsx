@@ -1,6 +1,6 @@
 import React, {useEffect, useState}                                          from 'react';
 import {connect}                                                             from "react-redux";
-import {createPattern, deletePattern, getPatterns, setSearch, updatePattern} from "../../redux/patternReducer.js";
+import {createPattern, deletePattern, getPatterns, setSearch, updatePattern} from "../../redux/patternReducer.ts";
 import {getFilteredPatterns}                                                 from "../../redux/selectors/patternSelectors.js";
 import AddItemForm                                                           from "../common/AddItemForm/AddItemForm.jsx";
 import Loader                                                                from "../common/Loader/Loader.jsx";

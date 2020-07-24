@@ -18,11 +18,6 @@ export interface PatternInitialState {
    search: string
 }
 
-export const setPatterns = patterns => ({type: SET_PATTERNS, patterns})
-export const addPattern = pattern => ({type: ADD_PATTERN, pattern})
-export const deletePatternItem = kjatternId, title, description) => ({type: UPDATE_PATTERN, patternId, title, description})
-export const setSearch = search => ({type: SET_SEARCH, search})
-
 
 
 export interface SetPatternsAction {

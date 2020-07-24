@@ -1,7 +1,7 @@
 import React, {useEffect}                               from 'react';
 import styles                                           from './EnglishPage.module.scss'
 import {connect}                                        from "react-redux";
-import {addWordToDictionary, deleteWord, getDictionary} from "../../redux/englishReducer.js";
+import {addWordToDictionary, deleteWord, getDictionary} from "../../redux/englishReducer.ts";
 import AddItemForm                                      from "../common/AddItemForm/AddItemForm.jsx";
 import EnglishPageItem                                  from "./EnglishPageItem.jsx";
 
