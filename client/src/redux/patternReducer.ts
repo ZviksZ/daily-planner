@@ -81,8 +81,9 @@ export const getPatterns = () => async (dispatch: Dispatch<AppActions>, getState
       getGlobalError(error.response.data.message)
    }
 }
-export const createPattern = (title: string, description: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+export const createPattern = (title: string, description?: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
+      description = description ? description : '';
       let response = await patternsAPI.createPattern(title, description)
       dispatch(addPattern(response.data.pattern))
    } catch (error) {

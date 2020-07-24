@@ -1,8 +1,16 @@
 import React        from 'react';
 import PatternsItem from "../PatternsItem/PatternsItem.jsx";
+import {IPattern}   from "../../../types/pattern_types";
+
+type Props = {
+   title: string
+   list: IPattern[]
+   updatePattern: (patternId: string, title: string, description: string) => void
+   deletePattern: (patternId: string) => void
+}
 
 
-const PatternsList = ({title, list, updatePattern, deletePattern}) => {
+const PatternsList:React.FC<Props> = ({title, list, updatePattern, deletePattern}) => {
    return (
       <>
          {list.length

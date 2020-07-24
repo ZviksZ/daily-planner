@@ -3,15 +3,23 @@ import React, {useState} from 'react';
 import styles            from '../PatternsPage.module.scss'
 
 import { FaWindowClose } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
-import { MdRefresh } from "react-icons/md";
-import { TiCancel } from "react-icons/ti";
+import { FaPen }         from "react-icons/fa";
+import { MdRefresh }     from "react-icons/md";
+import { TiCancel }      from "react-icons/ti";
+import {IPattern}        from "../../../types/pattern_types";
 
-const PatternsItem = ({pattern, updatePattern, deletePattern}) => {
+
+type Props = {
+   pattern: IPattern
+   updatePattern: (patternId: string, title: string, description: string) => void
+   deletePattern: (patternId: string) => void
+}
+
+const PatternsItem: React.FC<Props> = ({pattern, updatePattern, deletePattern}) => {
    const [editMode, setEditMode] = useState(false);
    const [values, setValues] = useState({title: pattern.title, description: pattern.description});
 
-   const handleChange = event => {
+   const handleChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
       const {name, value} = event.target;
       setValues({...values, [name]: value})
    }

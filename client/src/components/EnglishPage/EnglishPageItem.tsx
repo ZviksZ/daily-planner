@@ -1,7 +1,13 @@
-import React  from 'react';
-import styles from './EnglishPage.module.scss'
+import React          from 'react';
+import styles         from './EnglishPage.module.scss'
+import {IEnglishItem} from "../../types/english_types";
 
-const EnglishPageItem = ({word,deleteWord}) => {
+type Props = {
+   word: IEnglishItem
+   deleteWord: (id: string) => void
+}
+
+const EnglishPageItem: React.FC<Props> = ({word,deleteWord}) => {
    return (
       <tr id={word._id}>
          <td>{word.wordEng}</td>

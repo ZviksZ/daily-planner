@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles            from './AddItemForm.module.scss'
 
 interface Props {
-   onSend: (title: string, additional?: string) => void
+   onSend: (title: string, description?: string) => void
    placeholder: string
    secondField?: boolean
    secondFieldPlaceholder?: string
