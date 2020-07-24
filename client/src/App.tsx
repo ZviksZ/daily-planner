@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect}          from "react-redux";
-import Loader             from "./components/common/Loader/Loader.jsx";
+import Loader             from "./components/common/Loader/Loader";
 import {localStorageUser} from "./redux/authReducer";
 import {useRoutes}        from "./routes"
 

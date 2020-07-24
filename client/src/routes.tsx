@@ -2,7 +2,7 @@ import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
 import ChatPage                  from "./components/ChatPage/ChatPage.jsx";
-import GlobalError               from "./components/common/GlobalError/GlobalError.jsx";
+import GlobalError               from "./components/common/GlobalError/GlobalError";
 import EnglishPage               from "./components/EnglishPage/EnglishPage.jsx";
 import {Navbar}                  from "./components/Navbar/Navbar";
 import PatternsPage              from "./components/PatternsPage/PatternsPage.jsx";

@@ -2,8 +2,8 @@ import React, {useEffect}                                           from 'react'
 import {connect}                                                    from "react-redux";
 import {getTodosCompleted, getTodosNoCompleted}                     from "../../redux/selectors/todoSelectors";
 import {completeTodo, createTodo, deleteTodo, getTodos, updateTodo} from "../../redux/todoReducer";
-import AddItemForm                                                  from "../common/AddItemForm/AddItemForm.jsx";
-import Loader                                                       from "../common/Loader/Loader.jsx";
+import AddItemForm                                                  from "../common/AddItemForm/AddItemForm";
+import Loader                                                       from "../common/Loader/Loader";
 import TodoList                                                     from "./TodoList/TodoList";
 import styles                                                       from './TodosPage.module.scss'
 import {ThunkDispatch}                                              from "redux-thunk";

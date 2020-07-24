@@ -1,16 +1,22 @@
 import React, {useState} from 'react';
 import styles            from './AddItemForm.module.scss'
 
+interface Props {
+   onSend: (title: string, additional?: string) => void
+   placeholder: string
+   secondField?: boolean
+   secondFieldPlaceholder?: string
+}
 
-const AddItemForm = ({onSend, placeholder, secondField = false, secondFieldPlaceholder = ''}) => {
+const AddItemForm: React.FC<Props> = ({onSend, placeholder, secondField = false, secondFieldPlaceholder = ''}) => {
    const [values, setValues] = useState({title: '', additionalField: ''});
 
-   const handleChange = event => {
+   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const {name, value} = event.target;
       setValues({...values, [name]: value})
    }
 
-   const pressHandler = async e => {
+   const pressHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
          if (!secondField) {
             onSend(values.title);
@@ -20,7 +26,7 @@ const AddItemForm = ({onSend, placeholder, secondField = false, secondFieldPlace
       }
    }
 
-   const twoFieldSend = async e => {
+   const twoFieldSend = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
       if (secondField) {

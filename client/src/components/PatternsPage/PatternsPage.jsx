@@ -2,8 +2,8 @@ import React, {useEffect, useState}                                          fro
 import {connect}                                                             from "react-redux";
 import {createPattern, deletePattern, getPatterns, setSearch, updatePattern} from "../../redux/patternReducer.ts";
 import {getFilteredPatterns}                                                 from "../../redux/selectors/patternSelectors.js";
-import AddItemForm                                                           from "../common/AddItemForm/AddItemForm.jsx";
-import Loader                                                                from "../common/Loader/Loader.jsx";
+import AddItemForm                                                           from "../common/AddItemForm/AddItemForm.tsx";
+import Loader                                                                from "../common/Loader/Loader.tsx";
 import SearchAndFilter                                                       from "../common/SearchAndFilter/SearchAndFilter.jsx";
 import PatternsList                                                          from "./PatternsList/PatternsList.jsx";
 import styles                                                                from './PatternsPage.module.scss'
