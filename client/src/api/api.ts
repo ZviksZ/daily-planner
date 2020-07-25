@@ -1,5 +1,6 @@
-import axios   from "axios";
-import {ITodo} from "../types/todos_types";
+import axios                  from "axios";
+import {ITodo}                from "../types/todos_types";
+import {IProjectTechnologies} from "../types/project_types";
 
 const instance = axios.create({
    /*baseURL: 'https://daily-23.herokuapp.com',*/
@@ -89,15 +90,11 @@ export const englishAPI = {
    }
 }
 
-type TechnologiesType = {
-   value: string,
-   label: string
-}
 export const projectAPI = {
    getProjects() {
       return instance.get(`/api/project`).then(response => response.data);
    },
-   createProject(technologies: Array<TechnologiesType>, description: string, demoLink: string, gitLink: string) {
+   createProject(technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string) {
       return instance.post(`/api/project/generate`, {
          technologies: technologies,
          description: description,
@@ -108,7 +105,7 @@ export const projectAPI = {
    deleteProject(projectId: string) {
       return instance.delete(`/api/project/${projectId}`);
    },
-   updateProject(technologies: Array<TechnologiesType>, description: string, demoLink: string, gitLink: string, projectId: string) {
+   updateProject(technologies: IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId?: string) {
       return instance.put(`/api/project/${projectId}`, {
          technologies: technologies,
          description: description,

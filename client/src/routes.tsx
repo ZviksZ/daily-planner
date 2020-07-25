@@ -1,15 +1,14 @@
 import React                     from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import AuthPage                  from "./components/AuthPage/AuthPage";
-import ChatPage                  from "./components/ChatPage/ChatPage.jsx";
-import GlobalError               from "./components/common/GlobalError/GlobalError";
-import EnglishPage               from "./components/EnglishPage/EnglishPage";
-import {Navbar}                  from "./components/Navbar/Navbar";
-import PatternsPage              from "./components/PatternsPage/PatternsPage.jsx";
-import ProjectPage               from "./components/ProjectPage/ProjectPage";
-import Sidebar                   from "./components/Sidebar/Sidebar";
-import TodosPage                 from "./components/TodosPage/TodosPage";
-import VideoPage                 from "./components/VideoPage/VideoPage.jsx";
+import GlobalError  from "./components/common/GlobalError/GlobalError";
+import EnglishPage  from "./components/EnglishPage/EnglishPage";
+import {Navbar}     from "./components/Navbar/Navbar";
+import PatternsPage from "./components/PatternsPage/PatternsPage";
+import ProjectPage  from "./components/ProjectPage/ProjectPage";
+import Sidebar      from "./components/Sidebar/Sidebar";
+import TodosPage    from "./components/TodosPage/TodosPage";
+import VideoPage    from "./components/VideoPage/VideoPage";
 
 
 export const useRoutes = (isAuthenticated: boolean) => {
@@ -19,7 +18,6 @@ export const useRoutes = (isAuthenticated: boolean) => {
             <Navbar/>
             <Sidebar/>
             <GlobalError />
-            <ChatPage/>
             <div className="main__wrapper-in">
                <Switch>
                   <Route path="/todo">

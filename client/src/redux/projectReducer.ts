@@ -115,7 +115,7 @@ const projectReducer = (state = initialState, action: ProjectsActionTypes) => {
 export const setProjects = (projects: IProject[]): SetProjectsAction => ({type: SET_PROJECTS, projects})
 export const addProject = (project: IProject): AddProjectAction => ({type: ADD_PROJECT, project})
 export const deleteProject = (projectId: string): DeleteProjectAction => ({type: DELETE_PROJECT, projectId})
-export const updateProjectItem = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId: string): UpdateProjectAction => ({type: UPDATE_PROJECT, technologies, description, demoLink, gitLink, projectId})
+export const updateProjectItem = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId?: string): UpdateProjectAction => ({type: UPDATE_PROJECT, technologies, description, demoLink, gitLink, projectId})
 
 
 export const getProjects = () => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -144,7 +144,7 @@ export const deleteProjectItem = (projectId: string) => async (dispatch: Dispatc
    }
 }
 
-export const updateProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
+export const updateProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId?: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       await projectAPI.updateProject(technologies, description, demoLink, gitLink, projectId)
       dispatch(updateProjectItem(technologies, description, demoLink, gitLink, projectId))

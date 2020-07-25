@@ -1,7 +1,6 @@
 import cn                from "classnames";
 import React, {useState} from 'react';
-import styles            from '../PatternsPage.module.scss'
-
+import styles            from '../PatternsPage.module.scss';
 import { FaWindowClose } from "react-icons/fa";
 import { FaPen }         from "react-icons/fa";
 import { MdRefresh }     from "react-icons/md";

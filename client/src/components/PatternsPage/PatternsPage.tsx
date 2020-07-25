@@ -1,16 +1,16 @@
 import React, {useEffect, useState}                                          from 'react';
 import {connect}                                                             from "react-redux";
 import {createPattern, deletePattern, getPatterns, setSearch, updatePattern} from "../../redux/patternReducer";
-import {getFilteredPatterns} from "../../redux/selectors/patternSelectors";
-import AddItemForm           from "../common/AddItemForm/AddItemForm";
-import Loader                from "../common/Loader/Loader";
-import SearchAndFilter       from "../common/SearchAndFilter/SearchAndFilter.jsx";
-import PatternsList          from "./PatternsList/PatternsList.jsx";
-import styles                from './PatternsPage.module.scss'
-import {AppState}            from "../../redux/store";
-import {ThunkDispatch}       from "redux-thunk";
-import {AppActions}          from "../../types/common_types";
-import {bindActionCreators}  from "redux";
+import {getFilteredPatterns}                                                 from "../../redux/selectors/patternSelectors";
+import AddItemForm                                                           from "../common/AddItemForm/AddItemForm";
+import Loader                                                                from "../common/Loader/Loader";
+import SearchAndFilter                                                       from "../common/SearchAndFilter/SearchAndFilter";
+import PatternsList                                                          from "./PatternsList/PatternsList";
+import styles                                                                from './PatternsPage.module.scss'
+import {AppState}                                                            from "../../redux/store";
+import {ThunkDispatch}                                                       from "redux-thunk";
+import {AppActions}                                                          from "../../types/common_types";
+import {bindActionCreators}                                                  from "redux";
 import {IPattern}                                                            from "../../types/pattern_types";
 
 

@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
-import Select            from "react-select";
-import styles            from "../../VideoPage/VideoPage.module.scss";
+import React, {useState}                from 'react';
+import Select                           from "react-select";
+import styles                           from "../../VideoPage/VideoPage.module.scss";
+import {IProject, IProjectTechnologies} from "../../../types/project_types";
 
-const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}, setEditMode}) => {
-   const [technologies, setTechnologies] = useState(project.technologies || null);
+
+type Props = {
+   onSubmitHandler: (technologies: IProjectTechnologies[], description:string, demoLink:string, gitLink:string, projectId?: string) => void
+   technologiesOptions: IProjectTechnologies[]
+   project?: IProject
+   setEditMode: (val: boolean) => void
+}
+
+const ProjectForm: React.FC<Props> = ({onSubmitHandler, technologiesOptions, project = {}, setEditMode}) => {
+   const [technologies, setTechnologies] = useState(project.technologies || []);
    const [values, setValues] = useState({
       description: project.description || '',
       demoLink: project.demoLink || '',
       gitLink: project.gitLink || ''
    });
 
-   const handleChange = event => {
+   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
       setValues({
          ...values,
@@ -18,11 +27,11 @@ const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}, setEdi
       });
    };
 
-   const handleChangeSelect = selectedOption => {
+   const handleChangeSelect = (selectedOption: any) => {
       setTechnologies(selectedOption)
    };
 
-   const onSubmit = e => {
+   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       if (project !== {}) {
          onSubmitHandler(technologies, values.description, values.demoLink,values.gitLink, project._id);
@@ -35,7 +44,7 @@ const ProjectForm = ({onSubmitHandler, technologiesOptions, project = {}, setEdi
             demoLink: '',
             gitLink: ''
          })
-         setTechnologies(null)
+         setTechnologies([])
       }
 
    }

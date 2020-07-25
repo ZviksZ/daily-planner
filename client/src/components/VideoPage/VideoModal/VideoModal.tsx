@@ -1,7 +1,12 @@
 import React  from 'react';
 import styles from '../VideoPage.module.scss'
 
-const VideoModal = ({link, closeModal}) => {
+type Props = {
+   link: string
+   closeModal: () => void
+}
+
+const VideoModal: React.FC<Props> = ({link, closeModal}) => {
    return (
       <div className={styles.videoModal}>
          <div className={styles.videoWrap}>

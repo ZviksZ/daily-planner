@@ -1,13 +1,14 @@
 import React, {useEffect, useState}                                   from 'react';
 import {connect}                                                      from "react-redux";
 import {createProject, deleteProjectItem, getProjects, updateProject} from "../../redux/projectReducer";
-import ProjectForm                                                    from "./ProjectForm/ProjectForm.jsx";
-import ProjectItem                                                    from "./ProjectItem/ProjectItem.jsx";
+import ProjectForm                                                    from "./ProjectForm/ProjectForm";
+import ProjectItem                                                    from "./ProjectItem/ProjectItem";
 import styles                                                         from './ProjectPage.module.scss'
 import {AppState}                                                     from "../../redux/store";
 import {ThunkDispatch}                                                from "redux-thunk";
 import {AppActions}                                                   from "../../types/common_types";
 import {bindActionCreators}                                           from "redux";
+import {IProject, IProjectTechnologies}                               from "../../types/project_types";
 
 type Props = LinkStateProps & LinkDispatchProps;
 
@@ -39,15 +40,15 @@ const ProjectPage: React.FC<Props> = ({projects, technologiesOptions, getProject
 
 
 interface LinkStateProps {
-   projects: any,
-   technologiesOptions: any
+   projects: IProject[],
+   technologiesOptions: IProjectTechnologies[]
 }
 
 interface LinkDispatchProps {
    getProjects: () => void
-   createProject: (technologies: [], description:string, demoLink:string, gitLink:string) => void
+   createProject: (technologies: IProjectTechnologies[], description:string, demoLink:string, gitLink:string) => void
    deleteProjectItem: (projectId:string) => void
-   updateProject: (technologies: [], description:string, demoLink:string, gitLink:string, projectId:string) => void
+   updateProject: (technologies: IProjectTechnologies[], description:string, demoLink:string, gitLink:string, projectId?:string) => void
 }
 
 let mapStateToProps = (state: AppState): LinkStateProps => {

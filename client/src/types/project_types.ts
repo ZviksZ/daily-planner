@@ -37,11 +37,11 @@ export interface DeleteProjectAction {
 }
 export interface UpdateProjectAction {
    type: typeof UPDATE_PROJECT;
-   technologies:IProjectTechnologies[];
+   technologies: IProjectTechnologies[]
    description: string;
    demoLink: string;
    gitLink: string;
-   projectId: string;
+   projectId?: string;
 }
 
 

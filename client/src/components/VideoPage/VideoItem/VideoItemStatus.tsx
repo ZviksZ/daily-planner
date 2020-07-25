@@ -1,7 +1,11 @@
 import React  from 'react';
 import styles from "../VideoPage.module.scss";
 
-const VideoItemStatus = ({status}) => {
+
+type Props = {
+   status: string
+}
+const VideoItemStatus: React.FC<Props> = ({status}) => {
    return (
       <p>
          <span>Статус: </span>

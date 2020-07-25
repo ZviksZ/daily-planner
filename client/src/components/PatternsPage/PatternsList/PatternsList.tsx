@@ -1,5 +1,5 @@
 import React        from 'react';
-import PatternsItem from "../PatternsItem/PatternsItem.jsx";
+import PatternsItem from "../PatternsItem/PatternsItem";
 import {IPattern}   from "../../../types/pattern_types";
 
 type Props = {

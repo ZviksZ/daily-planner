@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
-import ProjectForm       from "../ProjectForm/ProjectForm.jsx";
+import ProjectForm       from "../ProjectForm/ProjectForm";
 import styles            from '../ProjectPage.module.scss'
 
-import { FaWindowClose } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
-import { TiCancel } from "react-icons/ti";
+import { FaWindowClose }                from "react-icons/fa";
+import { FaPen }                        from "react-icons/fa";
+import { TiCancel }                     from "react-icons/ti";
+import {IProject, IProjectTechnologies} from "../../../types/project_types";
 
-const ProjectItem = ({project, technologiesOptions, deleteProjectItem, updateProject}) => {
+
+type Props = {
+   project: IProject
+   technologiesOptions: IProjectTechnologies[]
+   deleteProjectItem: (projectId:string) => void
+   updateProject: (technologies: IProjectTechnologies[], description:string, demoLink:string, gitLink:string, projectId?:string) => void
+}
+
+const ProjectItem: React.FC<Props> = ({project, technologiesOptions, deleteProjectItem, updateProject}) => {
    const [editMode, setEditMode] = useState(false)
 
    return (

@@ -1,13 +1,24 @@
-import React, {useState} from 'react';
-import styles            from '../VideoPage.module.scss'
-import VideoItemEdit     from "./VideoItemEdit.jsx";
-import VideoItemStatus   from "./VideoItemStatus.jsx";
+import React, {useState}          from 'react';
+import styles                     from '../VideoPage.module.scss'
+import VideoItemEdit              from "./VideoItemEdit";
+import VideoItemStatus            from "./VideoItemStatus";
+import {IVideo, IVideoFilterItem} from "../../../types/video_types";
 
-const VideoItem = ({item, modalOpen, deleteVideo, updateVideoStatus, filterList}) => {
+
+type Props = {
+   item: IVideo
+   filterList: IVideoFilterItem[]
+   updateVideoStatus:(videoId: string, status: string) => void
+   deleteVideo: (videoId: string) => void
+   modalOpen: (link: string) => void
+}
+
+const VideoItem: React.FC<Props> = ({item, modalOpen, deleteVideo, updateVideoStatus, filterList}) => {
    const [select, setSelect] = useState(item.status)
+
    const [editMode, setEditMode] = useState(false)
 
-   const changeStatus = val => {
+   const changeStatus = (val: IVideoFilterItem) => {
       setSelect(val.value)
       updateVideoStatus(item._id, val.value)
    }
