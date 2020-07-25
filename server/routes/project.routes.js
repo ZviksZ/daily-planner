@@ -34,7 +34,7 @@ router.delete("/:id", auth, async (req, res)=>{
       const message = await Project
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
-      res.json({ message });
+      res.json({ message: 'Проект удален' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }
@@ -42,7 +42,7 @@ router.delete("/:id", auth, async (req, res)=>{
 
 router.put("/:id", auth, async (req, res)=>{
    try {
-      const message = await Project
+      await Project
          .updateOne({owner: req.user.userId, _id: req.params.id}, {
             description: req.body.description,
             technologies: req.body.technologies,
@@ -50,7 +50,7 @@ router.put("/:id", auth, async (req, res)=>{
             gitLink: req.body.gitLink
          })
 
-      res.json({ message });
+      res.json({ message: 'Проект обновлен'});
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }

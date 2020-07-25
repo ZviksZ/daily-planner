@@ -47,7 +47,7 @@ export const getDictionary = () => async (dispatch: Dispatch<AppActions>, getSta
 
       dispatch(setDictionary(response))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const addWordToDictionary = (wordEng: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -56,19 +56,19 @@ export const addWordToDictionary = (wordEng: string) => async (dispatch: Dispatc
       let wordRu = translate.data.text[0]
       let response = await englishAPI.addWordToDictionary(wordEng.toLowerCase(), wordRu)
 
-      dispatch(addNewWord(response.data.englishItem))
+      dispatch(addNewWord(response.englishItem))
    } catch (error) {
-     getGlobalError(error.response.data.message)
+     getGlobalError(error.response.message)
    }
 }
 
 export const deleteWord = (wordId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
-      let response = await englishAPI.deleteWord(wordId)
+      await englishAPI.deleteWord(wordId)
 
-      dispatch(deleteWordItem(response.data.message._id))
+      dispatch(deleteWordItem(wordId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 

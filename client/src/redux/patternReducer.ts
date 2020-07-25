@@ -78,25 +78,25 @@ export const getPatterns = () => async (dispatch: Dispatch<AppActions>, getState
       let response = await patternsAPI.getPatterns()
       dispatch(setPatterns(response))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const createPattern = (title: string, description?: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       description = description ? description : '';
       let response = await patternsAPI.createPattern(title, description)
-      dispatch(addPattern(response.data.pattern))
+      dispatch(addPattern(response.pattern))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const deletePattern = (patternId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await patternsAPI.deletePattern(patternId)
 
-      dispatch(deletePatternItem(response.data.message._id))
+      dispatch(deletePatternItem(patternId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const updatePattern = (patternId: string, title: string, description: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -104,7 +104,7 @@ export const updatePattern = (patternId: string, title: string, description: str
       await patternsAPI.updatePattern(patternId, title, description)
       dispatch(updatePatternItem(patternId, title, description))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 

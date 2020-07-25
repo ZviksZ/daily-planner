@@ -123,33 +123,34 @@ export const getProjects = () => async (dispatch: Dispatch<AppActions>, getState
       let response = await projectAPI.getProjects()
       dispatch(setProjects(response))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const createProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await projectAPI.createProject(technologies, description, demoLink, gitLink)
-      dispatch(addProject(response.data.project))
+      dispatch(addProject(response.project))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const deleteProjectItem = (projectId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
-      let response = await projectAPI.deleteProject(projectId)
+      await projectAPI.deleteProject(projectId)
 
-      dispatch(deleteProject(response.data.message._id))
+      dispatch(deleteProject(projectId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 
 export const updateProject = (technologies:IProjectTechnologies[], description: string, demoLink: string, gitLink: string, projectId?: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       await projectAPI.updateProject(technologies, description, demoLink, gitLink, projectId)
+
       dispatch(updateProjectItem(technologies, description, demoLink, gitLink, projectId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 

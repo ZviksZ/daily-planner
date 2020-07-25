@@ -31,10 +31,10 @@ router.get('/', auth, async (req, res) => {
 
 router.delete("/:id", auth, async (req, res)=>{
    try {
-      const message = await English
+      await English
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
-      res.json({ message });
+      res.json({ message: 'Слово удалено из словаря' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }

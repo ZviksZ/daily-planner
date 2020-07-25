@@ -36,7 +36,7 @@ router.delete("/:id", auth, async (req, res)=>{
       const message = await Pattern
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
-      res.json({ message });
+      res.json({ message: 'Паттерн удален' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }
@@ -44,10 +44,10 @@ router.delete("/:id", auth, async (req, res)=>{
 
 router.put("/:id", auth, async (req, res)=>{
    try {
-      const message = await Pattern
+      await Pattern
          .updateOne({owner: req.user.userId, _id: req.params.id}, { title: req.body.title, description: req.body.description})
 
-      res.json({ message });
+      res.json({ message: 'Паттерн обновлен'});
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }

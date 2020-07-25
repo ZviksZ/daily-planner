@@ -30,20 +30,20 @@ router.get('/', auth, async (req, res) => {
 })
 router.put("/:id", auth, async (req, res)=>{
    try {
-      const message = await Video
+      await Video
          .updateOne({owner: req.user.userId, _id: req.params.id}, { status: req.body.status})
 
-      res.json({ message });
+      res.json({ message: 'Видео обновлено' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }
 });
 router.delete("/:id", auth, async (req, res)=>{
    try {
-      const message = await Video
+      await Video
          .findOneAndDelete({owner: req.user.userId, _id: req.params.id})
 
-      res.json({ message });
+      res.json({ message: 'Видео удалено' });
    } catch (e) {
       res.status(500).json({message: 'Что-то пошло не так, попробуйте снова'})
    }

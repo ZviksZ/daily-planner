@@ -75,7 +75,7 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
       }))
       dispatch(setUserData(response.token, response.userId, email))
    } catch (error) {
-      dispatch(setError(error.response.data.message))
+      dispatch(setError(error.response.message))
       setTimeout(() => {
          dispatch(setError(''))
       }, 3000)
@@ -91,7 +91,7 @@ export const register = (email: string, password: string) => async (dispatch: Di
          dispatch(setLoading(false))
       }, 3000)
    } catch (error) {
-      dispatch(setError(error.response.data.message))
+      dispatch(setError(error.response.message))
       setTimeout(() => {
          dispatch(setError(''))
          dispatch(setLoading(false))

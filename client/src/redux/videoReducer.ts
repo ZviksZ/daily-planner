@@ -94,7 +94,7 @@ export const getVideos = () => async (dispatch: Dispatch<AppActions>, getState: 
       let response = await videoAPI.getVideos()
       dispatch(setVideos(response))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const addVideo = (url: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -105,19 +105,19 @@ export const addVideo = (url: string) => async (dispatch: Dispatch<AppActions>, 
       const {title, channelTitle} = videoData.items[0].snippet
       const previewImg = videoData.items[0].snippet.thumbnails.medium.url
       let response = await videoAPI.addVideo(newLink, title, channelTitle, previewImg)
-      dispatch(addVideoItem(response.data.video))
+      dispatch(addVideoItem(response.video))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 
 export const deleteVideo = (videoId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
-      let response = await videoAPI.deleteVideo(videoId)
+      await videoAPI.deleteVideo(videoId)
 
-      dispatch(deleteVideoItem(response.data.message._id))
+      dispatch(deleteVideoItem(videoId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const updateVideoStatus = (videoId: string, status: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -126,7 +126,7 @@ export const updateVideoStatus = (videoId: string, status: string) => async (dis
 
       dispatch(updateVideoItem(videoId, status))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 

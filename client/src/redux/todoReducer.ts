@@ -83,16 +83,16 @@ export const getTodos = () => async (dispatch: Dispatch<AppActions>, getState: (
       let response = await todosAPI.getTodos()
       dispatch(setTodos(response))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const createTodo = (title: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
    try {
       let response = await todosAPI.createTodo(title)
 
-      dispatch(addTodo(response.data.todo))
+      dispatch(addTodo(response.todo))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const deleteTodo = (todoId: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -101,7 +101,7 @@ export const deleteTodo = (todoId: string) => async (dispatch: Dispatch<AppActio
 
       dispatch(deleteTodoItem(todoId))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const updateTodo = (todoId: string, title: string) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -109,7 +109,7 @@ export const updateTodo = (todoId: string, title: string) => async (dispatch: Di
       await todosAPI.updateTodo(todoId, title)
       dispatch(updateTodoItem(todoId, title))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 export const completeTodo = (todoId: string, completed: boolean) => async (dispatch: Dispatch<AppActions>, getState: () => AppState) => {
@@ -117,7 +117,7 @@ export const completeTodo = (todoId: string, completed: boolean) => async (dispa
       await todosAPI.completeTodo(todoId, completed)
       dispatch(completedTodoItem(todoId, completed))
    } catch (error) {
-      getGlobalError(error.response.data.message)
+      getGlobalError(error.response.message)
    }
 }
 
